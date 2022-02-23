@@ -16,9 +16,9 @@ var top_left_position = Vector2(100,100)
 
 var pieces
 
-var cursol = Vector2(0,0)
-
 var key_hook = false
+
+var cursol = null
 
 var grabbedPiece = null
 
@@ -51,6 +51,7 @@ func input_init():
     var key_pressed = false
     if Input.is_action_pressed("ui_accept"):
         game_state = GameState.PLAY
+        cursol = Vector2(0,0)
         print_input()
         key_pressed = true
     return key_pressed
@@ -110,21 +111,20 @@ func input_finish():
     
 func select_piece():
     pass
-    if grabbedPiece == null:
-        return
-    var idx = grabbedPiece.y * int(sqrt(num_pieces)) + grabbedPiece.x
-    var tr = pieces[idx]
-    if tr.get_child_count() == 0:
-        var color_rect = ColorRect.new()
-        color_rect.rect_position = Vector2.ZERO
-        color_rect.rect_size = piece_size
-        color_rect.color = Color(1,1,1,0.5)
-        tr.add_child(color_rect)
-        
-    #target.draw_rect(Rect2(Vector2.ZERO, target.rect_size), Color.cyan, true)
-
-
-
+    var grab_idx = null
+    if grabbedPiece != null:
+        grab_idx = grabbedPiece.y * int(sqrt(num_pieces)) + grabbedPiece.x
+    
+    var cursol_idx = null
+    if cursol != null:
+        cursol_idx = cursol.y * int(sqrt(num_pieces)) + cursol.x
+    
+    for idx in range(0, num_pieces):
+        var tr = pieces[idx]
+        var color = Color(1,1,1,0)
+        if idx == grab_idx or idx == cursol_idx:
+            color = Color(1,1,1,0.5)
+        tr.color_rect.color = color
 
 func print_input():
     pass
@@ -163,19 +163,18 @@ func init_game(level, num_pieces):
     scene_instance = load("res://levels/dragon_fly/Main.tscn").instance()
     $Viewport.add_child(scene_instance)
     init_pieces(num_pieces)
-    cursol = Vector2(0,0)
+    cursol = null
     game_state = GameState.INIT
 
 func init_pieces(num_pieces):    
     # prepare pieces TextureRect
     pieces = []
     for i in range(0, num_pieces):
-        var tr = TextureRect.new()
+        #var tr = TextureRect.new()
+        var tr = Piece.instance()
         var position = get_initial_position(i) + top_left_position
         tr.set_position(position)
         tr.set_size(piece_size)
-
-        #tr.hint_tooltip = str(i)
         
         pieces.push_back(tr)
         var logstr = "position:" + str(tr.rect_global_position) + " visible:" + str(tr.visible) 
