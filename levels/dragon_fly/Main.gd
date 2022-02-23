@@ -31,6 +31,6 @@ func _on_Timer_timeout():
     #var direction = 0
     #var direction = PI * 0.25
     direction += rand_range(-PI / 4, PI / 4)
-    print("direction:" + str(direction))
+    #print("direction:" + str(direction))
     dragon_fly.rotation = direction
     dragon_fly.set_velocity_by_rotation()

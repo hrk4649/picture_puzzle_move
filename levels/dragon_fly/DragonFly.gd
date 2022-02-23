@@ -33,5 +33,5 @@ func _physics_process(delta):
 
 func _on_VisibilityNotifier2D_screen_exited():
     pass # Replace with function body.
-    print("_on_VisibilityNotifier2D_screen_exited")
+    #print("_on_VisibilityNotifier2D_screen_exited")
     queue_free()

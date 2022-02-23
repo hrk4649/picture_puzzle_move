@@ -1,5 +1,10 @@
 extends Node2D
 
+var Piece = preload("res://parts/Piece.tscn")
+
+enum GameState {INIT, SHUFFLE, PLAY, CHANGE, FINISH}
+
+var game_state = GameState.INIT
 
 var scene_instance = null
 
@@ -11,19 +16,122 @@ var top_left_position = Vector2(100,100)
 
 var pieces
 
-# Called when the node enters the scene tree for the first time.
+var cursol = Vector2(0,0)
+
+var key_hook = false
+
+var grabbedPiece = null
+
 func _ready():
     pass # Replace with function body.
-    # load scene and add to the viewport
     top_left_position = $PieceTopLeft.position
-
 
 func _process(delta):
     pass
     if(!visible):
         return
     pass
+    input(delta)
     change_texture_rect(delta)
+    select_piece()
+
+func input(delta):
+    match game_state:
+        GameState.INIT:
+            key_hook = input_init()
+        GameState.PLAY:
+            key_hook = input_play()
+        GameState.FINISH:
+            key_hook = input_finish()
+        _:
+            print("no process for game_state " + str(game_state))
+
+func input_init():
+    pass
+    var key_pressed = false
+    if Input.is_action_pressed("ui_accept"):
+        game_state = GameState.PLAY
+        print_input()
+        key_pressed = true
+    return key_pressed
+
+func input_play():
+    pass 
+
+    var key_pressed = false
+
+    # move cursol
+    var dx = 0
+    var dy = 0
+
+    var accept_pressed = false
+    
+    if Input.is_action_pressed("ui_left"):
+        dx = -1
+        key_pressed = true
+    elif Input.is_action_pressed("ui_right"):
+        dx = 1
+        key_pressed = true
+    elif Input.is_action_pressed("ui_up"):
+        dy = -1
+        key_pressed = true
+    elif Input.is_action_pressed("ui_down"):
+        dy = 1
+        key_pressed = true
+    elif Input.is_action_pressed("ui_accept"):
+        accept_pressed = true
+        key_pressed = true
+
+    if key_pressed and !key_hook:
+        pass
+        cursol.x = wrapi(cursol.x + dx, 0, int(sqrt(num_pieces)))
+        cursol.y = wrapi(cursol.y + dy, 0, int(sqrt(num_pieces)))
+        
+        if accept_pressed:
+            if grabbedPiece == null:
+                grabbedPiece = Vector2(cursol)
+            else:
+                pass
+                # change piece
+                
+                # reset
+                grabbedPiece = null
+        print_input()
+
+    return key_pressed 
+
+func input_finish():
+    pass 
+    var key_pressed = false
+    if Input.is_action_pressed("ui_accept"):
+        print_input()
+        key_pressed = true
+    return key_pressed
+    
+func select_piece():
+    pass
+    if grabbedPiece == null:
+        return
+    var idx = grabbedPiece.y * int(sqrt(num_pieces)) + grabbedPiece.x
+    var tr = pieces[idx]
+    if tr.get_child_count() == 0:
+        var color_rect = ColorRect.new()
+        color_rect.rect_position = Vector2.ZERO
+        color_rect.rect_size = piece_size
+        color_rect.color = Color(1,1,1,0.5)
+        tr.add_child(color_rect)
+        
+    #target.draw_rect(Rect2(Vector2.ZERO, target.rect_size), Color.cyan, true)
+
+
+
+
+func print_input():
+    pass
+    print("cursol = " + str(cursol))
+    print("grabbedPiece = " + str(grabbedPiece))
+    print("game_state = " + str(game_state))
+
 
 func change_texture_rect(delta):
     var tex = $Viewport.get_texture()
@@ -55,6 +163,8 @@ func init_game(level, num_pieces):
     scene_instance = load("res://levels/dragon_fly/Main.tscn").instance()
     $Viewport.add_child(scene_instance)
     init_pieces(num_pieces)
+    cursol = Vector2(0,0)
+    game_state = GameState.INIT
 
 func init_pieces(num_pieces):    
     # prepare pieces TextureRect
@@ -83,6 +193,9 @@ func stop_game():
     for tr in pieces:
         remove_child(tr)
     pieces = null
+
+func _input(event):
+    pass
 
 func _on_ButtonExit_button_up():
     pass # Replace with function body.

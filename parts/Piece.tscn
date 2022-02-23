@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="TextureRect" type="TextureRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
