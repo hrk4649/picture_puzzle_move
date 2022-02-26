@@ -31,4 +31,15 @@ render_target_update_mode = 3
 [node name="PieceTopLeft" type="Position2D" parent="."]
 position = Vector2( 300, 100 )
 
+[node name="GameClear" type="Label" parent="."]
+visible = false
+margin_left = 397.0
+margin_top = 181.0
+margin_right = 520.0
+margin_bottom = 271.0
+text = "Game Clear"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="button_up" from="ButtonExit" to="." method="_on_ButtonExit_button_up"]

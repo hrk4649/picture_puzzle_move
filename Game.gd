@@ -2,6 +2,8 @@ extends Node2D
 
 var Piece = preload("res://parts/Piece.tscn")
 
+var Board = preload("res://Board.gd")
+
 enum GameState {INIT, SHUFFLE, PLAY, CHANGE, FINISH}
 
 var game_state = GameState.INIT
@@ -16,6 +18,8 @@ var top_left_position = Vector2(100,100)
 
 var pieces
 
+var board
+
 var key_hook = false
 
 var cursol = null
@@ -25,6 +29,7 @@ var grabbedPiece = null
 func _ready():
     pass # Replace with function body.
     top_left_position = $PieceTopLeft.position
+    board = Board.new()
 
 func _process(delta):
     pass
@@ -53,6 +58,10 @@ func input_init():
         game_state = GameState.PLAY
         cursol = Vector2(0,0)
         print_input()
+        # shffle pieces
+        var shuffled = board.get_shuffled_piece_array()
+        board.pieces = shuffled
+        move_pieces()
         key_pressed = true
     return key_pressed
 
@@ -94,12 +103,29 @@ func input_play():
             else:
                 pass
                 # change piece
-                
+                var piece1_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
+                var piece2_idx = board.get_piece_num(cursol.x, cursol.y)
+                var piece1_value = board.pieces[piece1_idx]
+                var piece2_value = board.pieces[piece2_idx]
+                board.pieces[piece1_idx] = piece2_value
+                board.pieces[piece2_idx] = piece1_value
+                move_pieces()
                 # reset
                 grabbedPiece = null
+                # game clear check
+                if board.is_all_piece_on_correct_place():
+                    game_clear()
         print_input()
 
     return key_pressed 
+
+func game_clear():
+    cursol = null
+    game_state = GameState.FINISH
+    var label = $GameClear
+    remove_child(label)
+    add_child(label)
+    $GameClear.visible = true    
 
 func input_finish():
     pass 
@@ -113,16 +139,17 @@ func select_piece():
     pass
     var grab_idx = null
     if grabbedPiece != null:
-        grab_idx = grabbedPiece.y * int(sqrt(num_pieces)) + grabbedPiece.x
+        grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
     
     var cursol_idx = null
     if cursol != null:
-        cursol_idx = cursol.y * int(sqrt(num_pieces)) + cursol.x
+        cursol_idx = board.get_piece_num(cursol.x, cursol.y)
     
-    for idx in range(0, num_pieces):
-        var tr = pieces[idx]
+    for idx1 in range(0, num_pieces):
+        var idx2 = board.pieces[idx1]
+        var tr = pieces[idx2]
         var color = Color(1,1,1,0)
-        if idx == grab_idx or idx == cursol_idx:
+        if idx1 == grab_idx or idx1 == cursol_idx:
             color = Color(1,1,1,0.5)
         tr.color_rect.color = color
 
@@ -165,6 +192,9 @@ func init_game(level, num_pieces):
     init_pieces(num_pieces)
     cursol = null
     game_state = GameState.INIT
+    board.init(num_pieces, piece_size)
+    
+    $GameClear.visible = false
 
 func init_pieces(num_pieces):    
     # prepare pieces TextureRect
@@ -180,6 +210,14 @@ func init_pieces(num_pieces):
         var logstr = "position:" + str(tr.rect_global_position) + " visible:" + str(tr.visible) 
         print(logstr)
         add_child(tr)
+
+func move_pieces():
+    pass
+    for idx in range(0, num_pieces):
+        var idx_p = board.pieces[idx]
+        var tr = pieces[idx_p]
+        var position = get_initial_position(idx) + top_left_position
+        tr.set_position(position)
 
 func stop_game():
     """
