@@ -36,25 +36,38 @@ func _process(delta):
     if(!visible):
         return
     pass
-    input(delta)
-    change_texture_rect(delta)
-    select_piece()
-
-func input(delta):
     match game_state:
         GameState.INIT:
-            key_hook = input_init()
+            change_texture_rect(delta)
         GameState.PLAY:
-            key_hook = input_play()
+            change_texture_rect(delta)
+            select_piece()
         GameState.FINISH:
-            key_hook = input_finish()
+            change_texture_rect(delta)
         _:
             print("no process for game_state " + str(game_state))
 
-func input_init():
+func _input(event):
+    if(!visible):
+        return
+    match game_state:
+        GameState.INIT:
+            key_hook = input_init(event)
+        GameState.PLAY:
+            key_hook = input_play(event)
+        GameState.FINISH:
+            key_hook = input_finish(event)
+        _:
+            print("no process for game_state " + str(game_state))
+
+func input_init(event):
     pass
     var key_pressed = false
-    if Input.is_action_pressed("ui_accept"):
+
+    if event.is_action_pressed("ui_accept") and !key_hook:
+        key_pressed = true
+
+    if key_pressed and !key_hook:
         game_state = GameState.PLAY
         cursol = Vector2(0,0)
         print_input()
@@ -62,10 +75,9 @@ func input_init():
         var shuffled = board.get_shuffled_piece_array()
         board.pieces = shuffled
         move_pieces()
-        key_pressed = true
     return key_pressed
 
-func input_play():
+func input_play(event):
     pass 
 
     var key_pressed = false
@@ -76,21 +88,22 @@ func input_play():
 
     var accept_pressed = false
     
-    if Input.is_action_pressed("ui_left"):
+    if event.is_action_pressed("ui_left"):
         dx = -1
         key_pressed = true
-    elif Input.is_action_pressed("ui_right"):
+    elif event.is_action_pressed("ui_right"):
         dx = 1
         key_pressed = true
-    elif Input.is_action_pressed("ui_up"):
+    elif event.is_action_pressed("ui_up"):
         dy = -1
         key_pressed = true
-    elif Input.is_action_pressed("ui_down"):
+    elif event.is_action_pressed("ui_down"):
         dy = 1
         key_pressed = true
-    elif Input.is_action_pressed("ui_accept"):
+    elif event.is_action_pressed("ui_accept"):
         accept_pressed = true
         key_pressed = true
+
 
     if key_pressed and !key_hook:
         pass
@@ -100,6 +113,8 @@ func input_play():
         if accept_pressed:
             if grabbedPiece == null:
                 grabbedPiece = Vector2(cursol)
+                # for debug
+                # game_clear()
             else:
                 pass
                 # change piece
@@ -120,23 +135,36 @@ func input_play():
     return key_pressed 
 
 func game_clear():
-    cursol = null
     game_state = GameState.FINISH
     var label = $GameClear
     remove_child(label)
     add_child(label)
-    $GameClear.visible = true    
+    $GameClear.visible = true
+    key_hook = true
 
-func input_finish():
+    # reset select
+    cursol = null
+    grabbedPiece = null
+    select_piece()
+
+    #$ButtonExit.grab_focus()
+
+func input_finish(event):
     pass 
     var key_pressed = false
-    if Input.is_action_pressed("ui_accept"):
-        print_input()
+    if event.is_action_pressed("ui_accept"):
         key_pressed = true
+
+    if key_pressed and !key_hook:
+        print_input()
+        return_title()
+        
     return key_pressed
     
 func select_piece():
     pass
+    if pieces == null:
+        return
     var grab_idx = null
     if grabbedPiece != null:
         grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
@@ -161,6 +189,8 @@ func print_input():
 
 
 func change_texture_rect(delta):
+    if (pieces == null):
+        return
     var tex = $Viewport.get_texture()
     for i in range(0, num_pieces):
         var tr = pieces[i]
@@ -184,6 +214,7 @@ func get_picture_position(idx = 0):
 
 func init_game(level, num_pieces):
     pass
+    key_hook = true
     print("(level,num_pices) = (" + str(level) + "," + str(num_pieces) + ")")
 
     self.num_pieces = num_pieces
@@ -193,7 +224,6 @@ func init_game(level, num_pieces):
     cursol = null
     game_state = GameState.INIT
     board.init(num_pieces, piece_size)
-    
     $GameClear.visible = false
 
 func init_pieces(num_pieces):    
@@ -231,10 +261,9 @@ func stop_game():
         remove_child(tr)
     pieces = null
 
-func _input(event):
-    pass
-
-func _on_ButtonExit_button_up():
-    pass # Replace with function body.
+func return_title():
+    self.visible = false
     stop_game()
-    get_parent().change_scene_title()
+    get_parent().change_scene_title()   
+
+

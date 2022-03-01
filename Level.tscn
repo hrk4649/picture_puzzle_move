@@ -20,10 +20,10 @@ margin_left = 275.0
 margin_top = 58.0
 margin_right = 696.0
 margin_bottom = 574.0
-items = [ "Dragon Fly (3 x 3)", null, false ]
+items = [ "Dragon Fly (3 x 3)", null, false, "Dragon Fly (4 x 4)", null, false ]
 allow_reselect = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="item_activated" from="ItemList" to="." method="_on_ItemList_item_activated"]

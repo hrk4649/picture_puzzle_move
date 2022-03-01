@@ -15,8 +15,12 @@ func _ready():
 #func _process(delta):
 #    pass
 
+func grab_focus():
+    pass
+    $ItemList.grab_focus()
+    #$ItemList.select(0)
 
-func _on_ItemList_item_selected(index):
+func _on_ItemList_item_activated(index):
     pass # Replace with function body.
     $ItemList.unselect_all()
     var level = "dragon_fly"

@@ -5,18 +5,33 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+var key_hook = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func _input(event):
+    if(!visible):
+        return
+    key_hook = input_init(event)
 
+func input_init(event):
+    pass
+    var key_pressed = false
 
-func _on_Button_button_up():
+    if event.is_action_pressed("ui_accept"):
+        key_pressed = true
+
+    if key_pressed and !key_hook:
+        get_parent().change_scene_level()
+
+    return key_pressed
+
+func grab_focus():
+    pass
+
+func _on_Title_visibility_changed():
     pass # Replace with function body.
-    # change scene
-    get_parent().change_scene_level()
+    key_hook = true

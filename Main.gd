@@ -9,7 +9,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
-
+    change_scene_title()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -21,14 +21,16 @@ func change_scene_level():
     $Game.visible = false
 
     $Level.visible = true
+    $Level.grab_focus()
 
 func change_scene_game(level, num_pieces):
     pass
     $Title.visible = false
     $Level.visible = false
 
-    $Game.visible = true
     $Game.init_game(level, num_pieces)
+    $Game.visible = true
+
     
 func change_scene_title():
     pass
@@ -36,4 +38,4 @@ func change_scene_title():
     $Level.visible = false
 
     $Title.visible = true
-
+    $Title.grab_focus()

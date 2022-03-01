@@ -13,14 +13,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_left = 97.0
-margin_top = 48.0
-margin_right = 196.0
-margin_bottom = 92.0
-text = "select level"
+[node name="Label2" type="Label" parent="."]
+margin_left = 182.0
+margin_top = 130.0
+margin_right = 222.0
+margin_bottom = 144.0
+text = "Press Left Mouse Button
+or
+Press Space Key"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
+[connection signal="visibility_changed" from="." to="." method="_on_Title_visibility_changed"]
