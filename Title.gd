@@ -23,7 +23,9 @@ func input_init(event):
 
     if event.is_action_pressed("ui_accept"):
         key_pressed = true
-
+    elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+        key_pressed = true
+       
     if key_pressed and !key_hook:
         get_parent().change_scene_level()
 

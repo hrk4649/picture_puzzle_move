@@ -20,14 +20,13 @@ render_target_clear_mode = 2
 render_target_update_mode = 3
 
 [node name="PieceTopLeft" type="Position2D" parent="."]
-position = Vector2( 300, 100 )
+position = Vector2( 32, 53 )
 
 [node name="GameClear" type="Label" parent="."]
-visible = false
-margin_left = 397.0
-margin_top = 181.0
-margin_right = 520.0
-margin_bottom = 271.0
+margin_left = 131.0
+margin_top = 157.0
+margin_right = 254.0
+margin_bottom = 247.0
 text = "Game Clear"
 __meta__ = {
 "_edit_use_anchors_": false

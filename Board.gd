@@ -5,6 +5,8 @@ var num_pieces:int = 9
 
 var piece_size:Vector2 = Vector2(100,100)
 
+var margin = 0.05
+
 # int array
 var pieces:Array = []
 
@@ -62,15 +64,24 @@ func get_piece_y(n:int) -> int:
 func get_piece_num(x:int, y:int) -> int:
     return x + get_num_piece_x() * y
 
-func get_display_position(n:int) -> Vector2:
+func get_viewport_position(n:int) -> Vector2:
     return Vector2(get_piece_x(n) * piece_size.x, get_piece_y(n) * piece_size.y)
 
-func get_display_num(point:Vector2) ->int:
+func get_board_position(n:int) -> Vector2:
+    return Vector2(
+        get_piece_x(n) * piece_size.x * (1.0 + margin),
+        get_piece_y(n) * piece_size.y * (1.0 + margin))
+
+func get_board_cursol(n:int) -> Vector2:
+    return Vector2(get_piece_x(n), get_piece_y(n))
+
+func get_board_num(point:Vector2) ->int:
     pass
     var result:int = -1
     for num in range(0, num_pieces):
-        var rect = Rect2(get_display_position(num), piece_size)
+        var rect = Rect2(get_board_position(num), piece_size)
         if rect.has_point(point):
             result = num
             break
     return result
+

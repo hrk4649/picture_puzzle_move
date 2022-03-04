@@ -14,10 +14,10 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 182.0
-margin_top = 130.0
-margin_right = 222.0
-margin_bottom = 144.0
+margin_left = 135.0
+margin_top = 129.0
+margin_right = 265.0
+margin_bottom = 177.0
 text = "Picutre Puzzle Move
 
 Press Space Key"

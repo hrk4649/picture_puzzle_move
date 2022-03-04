@@ -66,6 +66,8 @@ func input_init(event):
 
     if event.is_action_pressed("ui_accept") and !key_hook:
         key_pressed = true
+    elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+        key_pressed = true
 
     if key_pressed and !key_hook:
         game_state = GameState.PLAY
@@ -79,6 +81,12 @@ func input_init(event):
 
 func input_play(event):
     pass 
+    if event is InputEventKey:
+        return input_play_key(event)
+    elif event is InputEventMouseButton:
+        return input_play_mouse(event)
+        
+func input_play_key(event):
 
     var key_pressed = false
 
@@ -104,35 +112,64 @@ func input_play(event):
         accept_pressed = true
         key_pressed = true
 
-
     if key_pressed and !key_hook:
         pass
-        cursol.x = wrapi(cursol.x + dx, 0, int(sqrt(num_pieces)))
-        cursol.y = wrapi(cursol.y + dy, 0, int(sqrt(num_pieces)))
+        cursol.x = wrapi(cursol.x + dx, 0, board.get_num_piece_x())
+        cursol.y = wrapi(cursol.y + dy, 0, board.get_num_piece_y())
         
         if accept_pressed:
-            if grabbedPiece == null:
-                grabbedPiece = Vector2(cursol)
-                # for debug
-                # game_clear()
-            else:
-                pass
-                # change piece
-                var piece1_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
-                var piece2_idx = board.get_piece_num(cursol.x, cursol.y)
-                var piece1_value = board.pieces[piece1_idx]
-                var piece2_value = board.pieces[piece2_idx]
-                board.pieces[piece1_idx] = piece2_value
-                board.pieces[piece2_idx] = piece1_value
-                move_pieces()
-                # reset
-                grabbedPiece = null
-                # game clear check
-                if board.is_all_piece_on_correct_place():
-                    game_clear()
+            input_play_select()
+
         print_input()
 
     return key_pressed 
+
+func input_play_mouse(event):
+    print("input_play_mouse:position:" +str(event.position) + " global:" + str(event.global_position))
+
+    # assume pressed if index is not BUTTON_LEFT
+    if event.button_index != BUTTON_LEFT:
+        return true
+
+    if event.pressed == false:
+        return false
+
+    var key_pressed = false
+
+    # check which piece is pressed
+    var num = board.get_board_num(event.position - top_left_position)
+    if num != -1:
+        cursol = board.get_board_cursol(num)
+        key_pressed = true
+
+    print("input_play_mouse:num:" +str(num) + " cursol:" + str(cursol))
+
+    if key_pressed and !key_hook:
+        input_play_select()
+
+    return key_pressed
+
+func input_play_select():
+    pass
+    if grabbedPiece == null:
+        grabbedPiece = Vector2(cursol)
+        # for debug
+        # game_clear()
+    else:
+        pass
+        # change piece
+        var piece1_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
+        var piece2_idx = board.get_piece_num(cursol.x, cursol.y)
+        var piece1_value = board.pieces[piece1_idx]
+        var piece2_value = board.pieces[piece2_idx]
+        board.pieces[piece1_idx] = piece2_value
+        board.pieces[piece2_idx] = piece1_value
+        move_pieces()
+        # reset
+        grabbedPiece = null
+        # game clear check
+        if board.is_all_piece_on_correct_place():
+            game_clear()
 
 func game_clear():
     game_state = GameState.FINISH
@@ -153,6 +190,8 @@ func input_finish(event):
     pass 
     var key_pressed = false
     if event.is_action_pressed("ui_accept"):
+        key_pressed = true
+    elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
         key_pressed = true
 
     if key_pressed and !key_hook:
@@ -196,21 +235,9 @@ func change_texture_rect(delta):
         var tr = pieces[i]
         var atlas_tex = AtlasTexture.new()
         atlas_tex.atlas = tex
-        var position = get_picture_position(i)
+        var position = board.get_viewport_position(i)
         atlas_tex.region = Rect2(position, piece_size)
         tr.texture = atlas_tex
-    
-func get_initial_position(idx = 0):
-    var num = int(sqrt(num_pieces))
-    var x = (idx % num) * piece_size.x * 1.05
-    var y = int(idx / num) * piece_size.y * 1.05
-    return Vector2(x,y)
-
-func get_picture_position(idx = 0):
-    var num = int(sqrt(num_pieces))
-    var x = (idx % num) * piece_size.x
-    var y = int(idx / num) * piece_size.y
-    return Vector2(x,y)
 
 func init_game(level, num_pieces):
     pass
@@ -232,7 +259,7 @@ func init_pieces(num_pieces):
     for i in range(0, num_pieces):
         #var tr = TextureRect.new()
         var tr = Piece.instance()
-        var position = get_initial_position(i) + top_left_position
+        var position = board.get_board_position(i) + top_left_position
         tr.set_position(position)
         tr.set_size(piece_size)
         
@@ -246,7 +273,7 @@ func move_pieces():
     for idx in range(0, num_pieces):
         var idx_p = board.pieces[idx]
         var tr = pieces[idx_p]
-        var position = get_initial_position(idx) + top_left_position
+        var position = board.get_board_position(idx) + top_left_position
         tr.set_position(position)
 
 func stop_game():
@@ -265,5 +292,3 @@ func return_title():
     self.visible = false
     stop_game()
     get_parent().change_scene_title()   
-
-
