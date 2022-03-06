@@ -1,30 +1,22 @@
 extends Node2D
 
 var Piece = preload("res://parts/Piece.tscn")
-
 var Board = preload("res://Board.gd")
 
 enum GameState {INIT, SHUFFLE, PLAY, CHANGE, FINISH}
+enum InputDevice {KEY_DPAD, MOUSE_TOUCH}
 
 var game_state = GameState.INIT
-
 var scene_instance = null
-
 var num_pieces = 9
-
 var piece_size = Vector2(100,100)
-
 var top_left_position = Vector2(100,100)
-
 var pieces
-
 var board
-
 var key_hook = false
-
 var cursol = null
-
 var grabbedPiece = null
+var input_device = InputDevice.KEY_DPAD
 
 func _ready():
     pass # Replace with function body.
@@ -39,6 +31,21 @@ func _process(delta):
     match game_state:
         GameState.INIT:
             change_texture_rect(delta)
+        GameState.SHUFFLE:
+            change_texture_rect(delta)
+            var all_moved = true
+            for i in range(0, num_pieces):
+                var tr = pieces[i]
+                if tr.anim_player.is_playing():
+                    all_moved = false
+                    break
+            if all_moved:
+                select_piece()
+                # game clear check
+                if board.is_all_piece_on_correct_place():
+                    game_clear()
+                else:
+                    game_state = GameState.PLAY
         GameState.PLAY:
             change_texture_rect(delta)
             select_piece()
@@ -65,8 +72,10 @@ func input_init(event):
     var key_pressed = false
 
     if event.is_action_pressed("ui_accept") and !key_hook:
+        input_device = InputDevice.KEY_DPAD
         key_pressed = true
     elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+        input_device = InputDevice.MOUSE_TOUCH
         key_pressed = true
 
     if key_pressed and !key_hook:
@@ -76,14 +85,18 @@ func input_init(event):
         # shffle pieces
         var shuffled = board.get_shuffled_piece_array()
         board.pieces = shuffled
-        move_pieces()
+        
+        move_pieces_animation()
+        game_state = GameState.SHUFFLE
     return key_pressed
 
 func input_play(event):
     pass 
     if event is InputEventKey:
+        input_device = InputDevice.KEY_DPAD
         return input_play_key(event)
     elif event is InputEventMouseButton:
+        input_device = InputDevice.MOUSE_TOUCH
         return input_play_mouse(event)
         
 func input_play_key(event):
@@ -164,12 +177,11 @@ func input_play_select():
         var piece2_value = board.pieces[piece2_idx]
         board.pieces[piece1_idx] = piece2_value
         board.pieces[piece2_idx] = piece1_value
-        move_pieces()
         # reset
         grabbedPiece = null
-        # game clear check
-        if board.is_all_piece_on_correct_place():
-            game_clear()
+        select_piece()
+        move_pieces_animation()
+        game_state = GameState.SHUFFLE
 
 func game_clear():
     game_state = GameState.FINISH
@@ -209,7 +221,7 @@ func select_piece():
         grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
     
     var cursol_idx = null
-    if cursol != null:
+    if cursol != null and input_device == InputDevice.KEY_DPAD:
         cursol_idx = board.get_piece_num(cursol.x, cursol.y)
     
     for idx1 in range(0, num_pieces):
@@ -268,13 +280,29 @@ func init_pieces(num_pieces):
         print(logstr)
         add_child(tr)
 
-func move_pieces():
+#func move_pieces():
+#    pass
+#    for idx in range(0, num_pieces):
+#        var idx_p = board.pieces[idx]
+#        var tr = pieces[idx_p]
+#        var position = board.get_board_position(idx) + top_left_position
+#        tr.set_position(position)
+
+func move_pieces_animation():
     pass
     for idx in range(0, num_pieces):
         var idx_p = board.pieces[idx]
         var tr = pieces[idx_p]
-        var position = board.get_board_position(idx) + top_left_position
-        tr.set_position(position)
+        var next_position = board.get_board_position(idx) + top_left_position
+        var current_position = tr.rect_position
+        if next_position != current_position:
+            tr.move_animation(next_position)
+    
+func move_piece_animation(idx_p, next_position):
+    pass
+    var tr = pieces[idx_p]
+    tr.move_animation(next_position)
+
 
 func stop_game():
     """
