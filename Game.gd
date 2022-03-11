@@ -14,7 +14,7 @@ var top_left_position = Vector2(100,100)
 var pieces
 var board
 var key_hook = false
-var cursol = null
+var cursor = null
 var grabbedPiece = null
 var input_device = InputDevice.KEY_DPAD
 
@@ -33,14 +33,15 @@ func _process(delta):
             change_texture_rect(delta)
         GameState.SHUFFLE:
             change_texture_rect(delta)
-            var all_moved = true
+            var shuffle_finished = true
             for i in range(0, num_pieces):
                 var tr = pieces[i]
                 if tr.anim_player.is_playing():
-                    all_moved = false
+                    shuffle_finished = false
                     break
-            if all_moved:
-                select_piece()
+            if shuffle_finished:
+                print("reset key_hook")
+                key_hook = false
                 # game clear check
                 if board.is_all_piece_on_correct_place():
                     game_clear()
@@ -48,7 +49,6 @@ func _process(delta):
                     game_state = GameState.PLAY
         GameState.PLAY:
             change_texture_rect(delta)
-            select_piece()
         GameState.FINISH:
             change_texture_rect(delta)
         _:
@@ -65,6 +65,7 @@ func _input(event):
         GameState.FINISH:
             key_hook = input_finish(event)
         _:
+            pass
             print("no process for game_state " + str(game_state))
 
 func input_init(event):
@@ -80,7 +81,7 @@ func input_init(event):
 
     if key_pressed and !key_hook:
         game_state = GameState.PLAY
-        cursol = Vector2(0,0)
+        cursor = Vector2(0,0)
         print_input()
         # shffle pieces
         var shuffled = board.get_shuffled_piece_array()
@@ -91,19 +92,23 @@ func input_init(event):
     return key_pressed
 
 func input_play(event):
-    pass 
+    pass
+    var key_pressed = false 
     if event is InputEventKey:
         input_device = InputDevice.KEY_DPAD
-        return input_play_key(event)
+        key_pressed = input_play_key(event)
+        set_pieces_color()
     elif event is InputEventMouseButton:
         input_device = InputDevice.MOUSE_TOUCH
-        return input_play_mouse(event)
+        key_pressed = input_play_mouse(event)
+        set_pieces_color()
+    return key_pressed
         
 func input_play_key(event):
 
     var key_pressed = false
 
-    # move cursol
+    # move cursor
     var dx = 0
     var dy = 0
 
@@ -127,8 +132,8 @@ func input_play_key(event):
 
     if key_pressed and !key_hook:
         pass
-        cursol.x = wrapi(cursol.x + dx, 0, board.get_num_piece_x())
-        cursol.y = wrapi(cursol.y + dy, 0, board.get_num_piece_y())
+        cursor.x = wrapi(cursor.x + dx, 0, board.get_num_piece_x())
+        cursor.y = wrapi(cursor.y + dy, 0, board.get_num_piece_y())
         
         if accept_pressed:
             input_play_select()
@@ -152,34 +157,36 @@ func input_play_mouse(event):
     # check which piece is pressed
     var num = board.get_board_num(event.position - top_left_position)
     if num != -1:
-        cursol = board.get_board_cursol(num)
+        cursor = board.get_board_cursor(num)
         key_pressed = true
 
-    print("input_play_mouse:num:" +str(num) + " cursol:" + str(cursol))
-
+    print("input_play_mouse:num:" +str(num) + " cursor:" + str(cursor))
+    print("input_play_mouse:key_pressed:" +str(key_pressed) + " key_hook:" + str(key_hook))
+    
     if key_pressed and !key_hook:
         input_play_select()
 
     return key_pressed
 
 func input_play_select():
+    print("input_play_select:cursor:" +str(cursor) + " grabbedPiece:" + str(grabbedPiece))
     pass
     if grabbedPiece == null:
-        grabbedPiece = Vector2(cursol)
+        grabbedPiece = Vector2(cursor)
+        select_piece_animation()
         # for debug
         # game_clear()
     else:
         pass
         # change piece
         var piece1_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
-        var piece2_idx = board.get_piece_num(cursol.x, cursol.y)
+        var piece2_idx = board.get_piece_num(cursor.x, cursor.y)
         var piece1_value = board.pieces[piece1_idx]
         var piece2_value = board.pieces[piece2_idx]
         board.pieces[piece1_idx] = piece2_value
         board.pieces[piece2_idx] = piece1_value
         # reset
         grabbedPiece = null
-        select_piece()
         move_pieces_animation()
         game_state = GameState.SHUFFLE
 
@@ -192,11 +199,9 @@ func game_clear():
     key_hook = true
 
     # reset select
-    cursol = null
+    cursor = null
     grabbedPiece = null
-    select_piece()
-
-    #$ButtonExit.grab_focus()
+    set_pieces_color()
 
 func input_finish(event):
     pass 
@@ -212,7 +217,7 @@ func input_finish(event):
         
     return key_pressed
     
-func select_piece():
+func set_pieces_color():
     pass
     if pieces == null:
         return
@@ -220,21 +225,34 @@ func select_piece():
     if grabbedPiece != null:
         grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
     
-    var cursol_idx = null
-    if cursol != null and input_device == InputDevice.KEY_DPAD:
-        cursol_idx = board.get_piece_num(cursol.x, cursol.y)
+    var cursor_idx = null
+    if cursor != null and input_device == InputDevice.KEY_DPAD:
+        cursor_idx = board.get_piece_num(cursor.x, cursor.y)
     
     for idx1 in range(0, num_pieces):
         var idx2 = board.pieces[idx1]
         var tr = pieces[idx2]
         var color = Color(1,1,1,0)
-        if idx1 == grab_idx or idx1 == cursol_idx:
+        if idx1 == grab_idx or idx1 == cursor_idx:
             color = Color(1,1,1,0.5)
         tr.color_rect.color = color
 
+func select_piece_animation():
+    pass
+    if pieces == null:
+        return
+    var grab_idx = null
+    if grabbedPiece != null:
+        grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
+    for idx1 in range(0, num_pieces):
+        var idx2 = board.pieces[idx1]
+        var tr = pieces[idx2]
+        if idx1 == grab_idx:
+            tr.select_animation()    
+
 func print_input():
     pass
-    print("cursol = " + str(cursol))
+    print("cursor = " + str(cursor))
     print("grabbedPiece = " + str(grabbedPiece))
     print("game_state = " + str(game_state))
 
@@ -260,7 +278,7 @@ func init_game(level, num_pieces):
     scene_instance = load("res://levels/dragon_fly/Main.tscn").instance()
     $Viewport.add_child(scene_instance)
     init_pieces(num_pieces)
-    cursol = null
+    cursor = null
     game_state = GameState.INIT
     board.init(num_pieces, piece_size)
     $GameClear.visible = false
@@ -274,6 +292,7 @@ func init_pieces(num_pieces):
         var position = board.get_board_position(i) + top_left_position
         tr.set_position(position)
         tr.set_size(piece_size)
+        tr.rect_pivot_offset = piece_size / 2
         
         pieces.push_back(tr)
         var logstr = "position:" + str(tr.rect_global_position) + " visible:" + str(tr.visible) 

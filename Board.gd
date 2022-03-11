@@ -72,7 +72,7 @@ func get_board_position(n:int) -> Vector2:
         get_piece_x(n) * piece_size.x * (1.0 + margin),
         get_piece_y(n) * piece_size.y * (1.0 + margin))
 
-func get_board_cursol(n:int) -> Vector2:
+func get_board_cursor(n:int) -> Vector2:
     return Vector2(get_piece_x(n), get_piece_y(n))
 
 func get_board_num(point:Vector2) ->int:
