@@ -94,7 +94,7 @@ func input_init(event):
 func input_play(event):
     pass
     var key_pressed = false 
-    if event is InputEventKey:
+    if event is InputEventKey or event is InputEventJoypadButton:
         input_device = InputDevice.KEY_DPAD
         key_pressed = input_play_key(event)
         set_pieces_color()
@@ -102,6 +102,8 @@ func input_play(event):
         input_device = InputDevice.MOUSE_TOUCH
         key_pressed = input_play_mouse(event)
         set_pieces_color()
+    else:
+        print("event is " + str(event))
     return key_pressed
         
 func input_play_key(event):
