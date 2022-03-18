@@ -1,19 +1,31 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var key_hook = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func _input(event):
+    if(!visible):
+        return
+    key_hook = input_init(event)
+
+func input_init(event):
+    pass
+    var key_pressed = false
+
+    if event.is_action_pressed("ui_accept"):
+        key_pressed = true
+    elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+        key_pressed = true
+       
+    if key_pressed and !key_hook:
+        _on_Button_pressed()
+
+    return key_pressed
 
 func grab_focus():
     pass

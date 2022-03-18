@@ -15,6 +15,8 @@ func _ready():
 func _input(event):
     if(!visible):
         return
+    print("_input:" + event.as_text())
+    print("_input:scancode:" + str(event.scancode))
     key_hook = input_init(event)
 
 func input_init(event):
