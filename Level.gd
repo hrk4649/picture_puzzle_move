@@ -1,5 +1,4 @@
-extends Node2D
-
+extends Control
 
 var key_hook = false
 
@@ -33,9 +32,16 @@ func grab_focus():
     #$ItemList.select(0)
 
 func choose_level(index):
-    var level = "dragon_fly"
-    var num_pieces = 9
-    get_parent().change_scene_game(level, num_pieces)
+    var levels = [
+        {"level":"dragon_fly", "num_pieces":9},
+        {"level":"dragon_fly", "num_pieces":16},
+        {"level":"balloon_3d", "num_pieces":9},
+       ]
+    if index >= 0 and index < levels.size():
+        var selected = levels[index]
+        var level = selected["level"]
+        var num_pieces = selected["num_pieces"]
+        get_parent().change_scene_game(level, num_pieces)
 
 func _on_Button_pressed():
     pass # Replace with function body.
