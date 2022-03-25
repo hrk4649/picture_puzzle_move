@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var Piece = preload("res://parts/Piece.tscn")
 var Board = preload("res://Board.gd")
@@ -20,7 +20,6 @@ var input_device = InputDevice.KEY_DPAD
 
 func _ready():
     pass # Replace with function body.
-    top_left_position = $PieceTopLeft.position
     board = Board.new()
 
 func _process(delta):
@@ -103,7 +102,8 @@ func input_play(event):
         key_pressed = input_play_mouse(event)
         set_pieces_color()
     else:
-        print("event is " + str(event))
+        pass
+        #print("event is " + str(event))
     return key_pressed
         
 func input_play_key(event):
@@ -277,13 +277,25 @@ func init_game(level, num_pieces):
     print("(level,num_pices) = (" + str(level) + "," + str(num_pieces) + ")")
 
     self.num_pieces = num_pieces
-    scene_instance = load("res://levels/dragon_fly/Main.tscn").instance()
+    board.init(num_pieces, piece_size)
+    
+    scene_instance = load("res://levels/" + level + "/Main.tscn").instance()
     $Viewport.add_child(scene_instance)
+    init_top_left_position()
     init_pieces(num_pieces)
     cursor = null
     game_state = GameState.INIT
-    board.init(num_pieces, piece_size)
+    
     $GameClear.visible = false
+
+func init_top_left_position():
+    pass
+    var parent_size = rect_size
+    var board_size = board.get_board_size()
+    top_left_position = Vector2(
+        parent_size.x / 2.0 - board_size.x / 2.0,
+        parent_size.y / 2.0 - board_size.y / 2.0
+       )
 
 func init_pieces(num_pieces):    
     # prepare pieces TextureRect
