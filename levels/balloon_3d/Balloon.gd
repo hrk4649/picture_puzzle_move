@@ -12,10 +12,10 @@ func _ready():
 
 func _integrate_forces(state):
     pass
-    var vel_horizon = Vector3(linear_velocity.x, 0, linear_velocity.z)
+    var vel_horizon = Vector3(state.linear_velocity.x, 0, state.linear_velocity.z)
     var drag_horizon = - 0.01 * vel_horizon.length_squared()
     
-    var vel_vertical = Vector3(0, linear_velocity.y, 0)
+    var vel_vertical = Vector3(0, state.linear_velocity.y, 0)
     var drag_vertical = - 0.01 * vel_vertical.length_squared()
     #acceralation += (vel_horizon * drag_horizon)
     state.add_central_force(
