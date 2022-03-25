@@ -10,6 +10,6 @@ func _on_Timer_timeout():
     pass # Replace with function body.
     var balloon = Balloon.instance()
     #var position = Vector3(rand_range(-10, 10), 0, rand_range(-10, 10))
+    add_child(balloon)
     var position = $Start.global_transform.origin
     balloon.global_transform.origin = position
-    add_child(balloon)
