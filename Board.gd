@@ -85,3 +85,8 @@ func get_board_num(point:Vector2) ->int:
             break
     return result
 
+func get_board_size() -> Vector2:
+    pass
+    return Vector2(
+        get_num_piece_x() * piece_size.x + (get_num_piece_x() - 1) * piece_size.x *  margin,
+        get_num_piece_y() * piece_size.y + (get_num_piece_y() - 1) * piece_size.y *  margin)
