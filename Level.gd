@@ -2,10 +2,24 @@ extends Control
 
 var key_hook = false
 
+
+var levels = [
+    {"level":"dragon_fly", "text":"Dragon Fly (3 x 3)", "num_pieces":9},
+    {"level":"dragon_fly", "text":"Dragon Fly (4 x 4)", "num_pieces":16},
+    {"level":"balloon_3d", "text":"Balloon (3 x 3)", "num_pieces":9},
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
+    init_item_list()
 
+func init_item_list():
+    pass
+    $ItemList.clear()
+    for level in levels:
+        pass
+        $ItemList.add_item(level.text)
 
 func _input(event):
     if(!visible):
@@ -32,11 +46,7 @@ func grab_focus():
     #$ItemList.select(0)
 
 func choose_level(index):
-    var levels = [
-        {"level":"dragon_fly", "num_pieces":9},
-        {"level":"dragon_fly", "num_pieces":16},
-        {"level":"balloon_3d", "num_pieces":9},
-       ]
+
     if index >= 0 and index < levels.size():
         var selected = levels[index]
         var level = selected["level"]

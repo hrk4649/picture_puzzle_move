@@ -28,7 +28,6 @@ margin_left = -150.0
 margin_right = 150.0
 focus_next = NodePath("../Button")
 custom_fonts/font = ExtResource( 2 )
-items = [ "Dragon Fly (3 x 3)", null, false, "Dragon Fly (4 x 4)", null, false, "Balloon (3 x 3)", null, false ]
 allow_reselect = true
 
 [node name="Button" type="Button" parent="."]
