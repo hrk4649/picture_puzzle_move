@@ -7,6 +7,9 @@ var levels = [
     {"level":"dragon_fly", "text":"Dragon Fly (3 x 3)", "num_pieces":9},
     {"level":"dragon_fly", "text":"Dragon Fly (4 x 4)", "num_pieces":16},
     {"level":"balloon_3d", "text":"Balloon (3 x 3)", "num_pieces":9},
+    {"level":"balloon_3d", "text":"Balloon (4 x 4)", "num_pieces":16},
+    {"level":"maple_leaves", "text":"Maple Leaves (3 x 3)", "num_pieces":9},
+    {"level":"maple_leaves", "text":"Maple Leaves (4 x 4)", "num_pieces":16},
 ]
 
 # Called when the node enters the scene tree for the first time.

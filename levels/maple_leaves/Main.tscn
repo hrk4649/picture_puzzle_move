@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://levels/maple_leaves/Main.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.992157, 0.666667, 0.282353, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 3.238 )
+far = 1000.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 123.0
+margin_bottom = 73.0
+
+[node name="Start" type="Position3D" parent="."]
+
+[node name="AppearanceArea" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+width = 2.5
+height = 5.0
+depth = 1.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
