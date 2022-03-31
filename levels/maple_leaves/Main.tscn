@@ -28,6 +28,7 @@ margin_bottom = 73.0
 
 [node name="AppearanceArea" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
 width = 2.5
 height = 5.0
 depth = 1.0
