@@ -263,6 +263,8 @@ func change_texture_rect(delta):
     if (pieces == null):
         return
     var tex = $Viewport.get_texture()
+    var tex_size = tex.get_size()
+    board.calc_viewport_top_left(tex_size)
     for i in range(0, num_pieces):
         var tr = pieces[i]
         var atlas_tex = AtlasTexture.new()
