@@ -4,6 +4,8 @@ var key_hook = false
 
 
 var levels = [
+    {"level":"ufo", "text":"UFO (3 x 3)", "num_pieces":9},
+    {"level":"ufo", "text":"UFO (4 x 4)", "num_pieces":16},
     {"level":"dragon_fly", "text":"Dragon Fly (3 x 3)", "num_pieces":9},
     {"level":"dragon_fly", "text":"Dragon Fly (4 x 4)", "num_pieces":16},
     {"level":"balloon_3d", "text":"Balloon (3 x 3)", "num_pieces":9},
