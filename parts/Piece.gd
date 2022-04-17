@@ -23,6 +23,7 @@ func move_animation(next_position):
         var time = idx * 0.2
         anim.track_insert_key(track_index_x, time, positions[idx].x)
         anim.track_insert_key(track_index_y, time, positions[idx].y)
+        anim.length = time
     anim_player.remove_animation("move")
     anim_player.add_animation("move", anim)
     anim_player.play("move")
