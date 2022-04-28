@@ -35,7 +35,7 @@ func _process(delta):
             var shuffle_finished = true
             for i in range(0, num_pieces):
                 var tr = pieces[i]
-                if tr.anim_player.is_playing():
+                if tr.is_moving():
                     shuffle_finished = false
                     break
             if shuffle_finished:

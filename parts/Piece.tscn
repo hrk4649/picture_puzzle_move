@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://parts/Piece.gd" type="Script" id=1]
 
@@ -69,22 +69,6 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "move"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 100, 100 ) ]
-}
-
 [sub_resource type="Animation" id=3]
 resource_name = "select"
 length = 0.5
@@ -115,21 +99,17 @@ margin_bottom = 40.0
 rect_pivot_offset = Vector2( 20, 20 )
 rect_clip_content = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
-anims/move = SubResource( 2 )
 anims/select = SubResource( 3 )
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer1" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer_animation_finished"]
