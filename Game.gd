@@ -277,7 +277,7 @@ func change_texture_rect(delta):
     # change background TextureRect
     var whole_picture = AtlasTexture.new()
     whole_picture.atlas = tex
-    whole_picture.region = self.get_rect()
+    whole_picture.region = Rect2(Vector2.ZERO, tex_size)
     $Background.texture = whole_picture
     
     # change pieces
