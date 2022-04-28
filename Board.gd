@@ -67,9 +67,7 @@ func get_piece_num(x:int, y:int) -> int:
     return x + get_num_piece_x() * y
 
 func get_viewport_position(n:int) -> Vector2:
-    return viewport_top_left + Vector2(
-        get_piece_x(n) * piece_size.x,
-        get_piece_y(n) * piece_size.y)
+    return viewport_top_left + get_board_position(n)
 
 func get_board_position(n:int) -> Vector2:
     return Vector2(
@@ -97,8 +95,4 @@ func get_board_size() -> Vector2:
 
 func calc_viewport_top_left(view_port_size:Vector2) -> void:
     pass
-    var board_size_no_margin = Vector2(
-        get_num_piece_x() * piece_size.x,
-        get_num_piece_y() * piece_size.y
-       )
-    viewport_top_left = view_port_size / 2 - board_size_no_margin / 2
+    viewport_top_left = view_port_size / 2 - get_board_size() / 2
