@@ -315,14 +315,6 @@ func init_pieces(num_pieces):
         print(logstr)
         add_child(tr)
 
-#func move_pieces():
-#    pass
-#    for idx in range(0, num_pieces):
-#        var idx_p = board.pieces[idx]
-#        var tr = pieces[idx_p]
-#        var position = board.get_board_position(idx) + top_left_position
-#        tr.set_position(position)
-
 func move_pieces_animation():
     pass
     for idx in range(0, num_pieces):
