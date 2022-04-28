@@ -18,9 +18,14 @@ var cursor = null
 var grabbedPiece = null
 var input_device = InputDevice.KEY_DPAD
 
+var anim_play1
+var anim_play2
+
 func _ready():
     pass # Replace with function body.
     board = Board.new()
+    anim_play1 = $AnimationPlayer1
+    anim_play2 = $AnimationPlayer2
 
 func _process(delta):
     pass
@@ -87,6 +92,7 @@ func input_init(event):
         board.pieces = shuffled
         
         move_pieces_animation()
+        anim_play1.play("fade_in")
         game_state = GameState.SHUFFLE
     return key_pressed
 
@@ -194,6 +200,8 @@ func input_play_select():
 
 func game_clear():
     game_state = GameState.FINISH
+    anim_play1.play("fade_out")
+    anim_play2.play("message")
     var label = $GameClear
     remove_child(label)
     add_child(label)
@@ -265,6 +273,14 @@ func change_texture_rect(delta):
     var tex = $Viewport.get_texture()
     var tex_size = tex.get_size()
     board.calc_viewport_top_left(tex_size)
+    
+    # change background TextureRect
+    var whole_picture = AtlasTexture.new()
+    whole_picture.atlas = tex
+    whole_picture.region = self.get_rect()
+    $Background.texture = whole_picture
+    
+    # change pieces
     for i in range(0, num_pieces):
         var tr = pieces[i]
         var atlas_tex = AtlasTexture.new()
