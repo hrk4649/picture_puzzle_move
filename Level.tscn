@@ -40,3 +40,6 @@ margin_right = 100.0
 focus_next = NodePath("../ItemList")
 custom_fonts/font = ExtResource( 2 )
 text = "START"
+
+[connection signal="item_activated" from="ItemList" to="." method="_on_ItemList_item_activated"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

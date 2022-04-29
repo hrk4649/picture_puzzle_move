@@ -1,8 +1,5 @@
 extends Control
 
-var key_hook = false
-
-
 var levels = [
     {"level":"ufo", "text":"UFO (3 x 3)", "num_pieces":9},
     {"level":"ufo", "text":"UFO (4 x 4)", "num_pieces":16},
@@ -14,7 +11,6 @@ var levels = [
     {"level":"maple_leaves", "text":"Maple Leaves (4 x 4)", "num_pieces":16},
 ]
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
     init_item_list()
@@ -25,25 +21,6 @@ func init_item_list():
     for level in levels:
         pass
         $ItemList.add_item(level.text)
-
-func _input(event):
-    if(!visible):
-        return
-    key_hook = input_init(event)
-
-func input_init(event):
-    pass
-    var key_pressed = false
-
-    if event.is_action_pressed("ui_accept"):
-        key_pressed = true
-    elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-        key_pressed = true
-       
-    if key_pressed and !key_hook:
-        _on_Button_pressed()
-
-    return key_pressed
 
 func grab_focus():
     pass
