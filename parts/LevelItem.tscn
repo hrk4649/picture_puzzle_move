@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://parts/LevelItem.gd" type="Script" id=2]
+
+[node name="LevelItem" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Labels" type="VBoxContainer" parent="."]
+margin_right = 360.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Labels"]
+margin_right = 360.0
+margin_bottom = 298.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "TITLE"
+align = 1
+valign = 1
+
+[node name="BestTime" type="Label" parent="Labels"]
+margin_top = 302.0
+margin_right = 360.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "00:00:00"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 364.0
+margin_right = 400.0
+margin_bottom = 600.0
+size_flags_vertical = 7
+custom_fonts/font = ExtResource( 1 )
+text = "▶"
