@@ -1,7 +1,5 @@
 extends Control
 
-var key_hook = false
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
@@ -10,9 +8,8 @@ func _ready():
 func _input(event):
     if(!visible):
         return
-    #print("_input:" + event.as_text())
-    #print("_input:scancode:" + str(event.scancode))
-    key_hook = input_init(event)
+    accept_event()
+    input_init(event)
 
 func input_init(event):
     pass
@@ -23,14 +20,9 @@ func input_init(event):
     elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
         key_pressed = true
        
-    if key_pressed and !key_hook:
+    if key_pressed:
         get_parent().change_scene_level()
-        accept_event()
     return key_pressed
 
 func grab_focus():
     pass
-
-func _on_Title_visibility_changed():
-    pass # Replace with function body.
-    key_hook = true

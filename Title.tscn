@@ -55,5 +55,3 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/forth_and_back = SubResource( 1 )
-
-[connection signal="visibility_changed" from="." to="." method="_on_Title_visibility_changed"]
