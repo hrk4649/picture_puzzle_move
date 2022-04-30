@@ -25,7 +25,7 @@ func input_init(event):
        
     if key_pressed and !key_hook:
         get_parent().change_scene_level()
-
+        accept_event()
     return key_pressed
 
 func grab_focus():
