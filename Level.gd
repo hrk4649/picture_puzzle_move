@@ -19,7 +19,7 @@ var firstLevelButton
 
 func _ready():
     pass # Replace with function body.
-    init_item_list2()
+    init_item_list()
 
 func _input(event):
     if(!visible):
@@ -38,14 +38,7 @@ func input_init(event):
 
     return key_pressed
 
-#func init_item_list():
-#    pass
-#    $ItemList.clear()
-#    for level in levels:
-#        pass
-#        $ItemList.add_item(level.text)
-
-func init_item_list2():
+func init_item_list():
     pass
     for child in $ScrollContainer/VBoxContainer.get_children():
         $ScrollContainer/VBoxContainer.remove_child(child)
@@ -59,12 +52,11 @@ func init_item_list2():
         if idx == 0:
             firstLevelButton = levelItem.button
 
-
 func grab_focus():
     pass
 #    $ItemList.grab_focus()
-#    if firstLevelButton != null:
-#        firstLevelButton.grab_focus()
+    if firstLevelButton != null:
+        firstLevelButton.grab_focus()
     $ScrollContainer.scroll_vertical = 0
     #$ItemList.select(0)
 
@@ -76,17 +68,3 @@ func choose_level(index):
         var level = selected["level"]
         var num_pieces = selected["num_pieces"]
         get_parent().change_scene_game(level, num_pieces)
-
-#func _on_Button_pressed():
-#    pass # Replace with function body.
-#    var items = $ItemList.get_selected_items()
-#    if items != null and items.size() == 1:
-#        $ItemList.unselect_all()
-#        var index = items[0]
-#        choose_level(index)
-#
-#
-#func _on_ItemList_item_activated(index):
-#    pass # Replace with function body.
-#    $ItemList.unselect_all()
-#    choose_level(index)
