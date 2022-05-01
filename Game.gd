@@ -13,7 +13,6 @@ var piece_size = Vector2(100,100)
 var top_left_position = Vector2(100,100)
 var pieces
 var board
-#var key_hook = false
 var cursor = null
 var grabbedPiece = null
 var input_device = InputDevice.KEY_DPAD
@@ -44,9 +43,6 @@ func _process(delta):
                     shuffle_finished = false
                     break
             if shuffle_finished:
-#                print("reset key_hook")
-#                key_hook = false
-                # game clear check
                 if board.is_all_piece_on_correct_place():
                     game_clear()
                 else:
@@ -170,7 +166,6 @@ func input_play_mouse(event):
         key_pressed = true
 
     print("input_play_mouse:num:" +str(num) + " cursor:" + str(cursor))
-    #print("input_play_mouse:key_pressed:" +str(key_pressed) + " key_hook:" + str(key_hook))
     
     if key_pressed:
         input_play_select()
@@ -207,7 +202,6 @@ func game_clear():
     remove_child(label)
     add_child(label)
     $GameClear.visible = true
-#    key_hook = true
 
     # reset select
     cursor = null
@@ -292,7 +286,6 @@ func change_texture_rect(delta):
 
 func init_game(level, num_pieces):
     pass
-#    key_hook = true
     print("(level,num_pices) = (" + str(level) + "," + str(num_pieces) + ")")
 
     self.num_pieces = num_pieces
