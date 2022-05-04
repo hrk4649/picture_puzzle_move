@@ -41,13 +41,10 @@ anchor_bottom = 0.5
 margin_left = -123.0
 margin_top = -96.0
 margin_right = 123.0
-margin_bottom = 96.0
 rect_scale = Vector2( 1.21402, 1.21402 )
 rect_pivot_offset = Vector2( 123, 96 )
 custom_fonts/font = ExtResource( 2 )
 text = "Picutre Puzzle Move
-
-Press Any Key
 
 ver 0.1.5
 (C) flat-e 2022"
@@ -56,3 +53,27 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/forth_and_back = SubResource( 1 )
+
+[node name="Start" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -45.0
+margin_right = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "START"
+
+[node name="Credit" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+input_pass_on_modal_close_click = false
+custom_fonts/font = ExtResource( 2 )
+text = "CREDIT"
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Credit" to="." method="_on_Credit_pressed"]

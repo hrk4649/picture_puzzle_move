@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://font_small.tres" type="DynamicFont" id=1]
+
+[node name="Label" type="Label"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 393.0
+margin_bottom = 634.0
+custom_fonts/font = ExtResource( 1 )
+autowrap = true

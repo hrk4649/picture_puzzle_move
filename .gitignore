@@ -12,3 +12,6 @@ data_*/
 
 # android export
 android/
+
+# Blender backup
+*.blend[0-9]*
