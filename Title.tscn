@@ -46,7 +46,7 @@ rect_pivot_offset = Vector2( 123, 96 )
 custom_fonts/font = ExtResource( 2 )
 text = "Picutre Puzzle Move
 
-ver 0.1.5
+ver 0.1.6
 (C) 2022 flat-e "
 align = 1
 
