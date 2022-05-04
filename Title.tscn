@@ -47,7 +47,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Picutre Puzzle Move
 
 ver 0.1.5
-(C) flat-e 2022"
+(C) 2022 flat-e "
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -56,11 +56,13 @@ anims/forth_and_back = SubResource( 1 )
 
 [node name="Start" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 0.9
+anchor_top = 0.7
 anchor_right = 0.5
-anchor_bottom = 0.9
-margin_left = -45.0
-margin_right = 45.0
+anchor_bottom = 0.7
+margin_left = -80.0
+margin_top = -10.0
+margin_right = 80.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "START"
 
