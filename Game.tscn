@@ -197,10 +197,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true, false ]
 }
 
 [node name="Game" type="Control"]
@@ -222,7 +222,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -100.0
 margin_right = 100.0
-rect_scale = Vector2( 50.7932, 49.6358 )
+rect_scale = Vector2( 0.01, 1e-05 )
 rect_pivot_offset = Vector2( 100, 18 )
 custom_fonts/font = ExtResource( 2 )
 text = "GAME CLEAR !!"
