@@ -14,6 +14,10 @@ config/name="Picture Puzzle Move"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+TimeManager="*res://TimeManager.gd"
+
 [display]
 
 window/size/width=400

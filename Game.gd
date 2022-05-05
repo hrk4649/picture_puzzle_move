@@ -9,6 +9,7 @@ enum InputDevice {KEY_DPAD, MOUSE_TOUCH}
 var game_state = GameState.INIT
 var scene_instance = null
 var num_pieces = 9
+var level = null
 var piece_size = Vector2(100,100)
 var top_left_position = Vector2(100,100)
 var pieces
@@ -19,6 +20,9 @@ var input_device = InputDevice.KEY_DPAD
 
 var anim_play1
 var anim_play2
+
+var time_start = 0
+var time = 0
 
 func _ready():
     pass # Replace with function body.
@@ -54,6 +58,23 @@ func _process(delta):
         _:
             print("no process for game_state " + str(game_state))
 
+func init_time():
+    time_start = OS.get_unix_time()
+    
+func calc_time():
+    var time_now = OS.get_unix_time()
+    time = time_now - time_start
+    var curr_record = TimeManager.get_record_time(level, num_pieces)
+
+    var message = "GAME CLEAR !"
+
+    if curr_record == null || time < curr_record:
+        message = "NEW RECORD !!"
+        TimeManager.record_time(level, num_pieces, time)
+
+    var time_str = TimeManager.get_record_time_str(time)
+    $GameClear.text = "%s\n%s" % [message, time_str]
+    
 func _input(event):
     if(!visible):
         return
@@ -82,6 +103,7 @@ func input_init(event):
 
     if key_pressed:
         game_state = GameState.PLAY
+        init_time()
         cursor = Vector2(0,0)
         print_input()
         # shffle pieces
@@ -194,8 +216,11 @@ func input_play_select():
         move_pieces_animation()
         game_state = GameState.SHUFFLE
 
+
+
 func game_clear():
     game_state = GameState.FINISH
+    calc_time()
     anim_play1.play("fade_out")
     anim_play2.play("message")
     var label = $GameClear
@@ -207,6 +232,7 @@ func game_clear():
     cursor = null
     grabbedPiece = null
     set_pieces_color()
+    
 
 func input_finish(event):
     pass 
@@ -287,7 +313,8 @@ func change_texture_rect(delta):
 func init_game(level, num_pieces):
     pass
     print("(level,num_pices) = (" + str(level) + "," + str(num_pieces) + ")")
-
+    
+    self.level = level
     self.num_pieces = num_pieces
     board.init(num_pieces, piece_size)
     
@@ -356,4 +383,5 @@ func stop_game():
 func return_title():
     self.visible = false
     stop_game()
+    TimeManager.save_record()
     get_parent().change_scene_title()   

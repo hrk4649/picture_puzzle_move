@@ -46,7 +46,14 @@ func init_item_list():
         var level = levels[idx]
         pass
         var levelItem = LevelItem.instance()
-        levelItem.init(level["text"], "00:00:00")
+        var record_time = TimeManager.get_record_time(
+            level["level"],
+            level["num_pieces"]
+           )
+        var record_time_str = "--:--"
+        if record_time != null:
+            record_time_str = TimeManager.get_record_time_str(record_time)
+        levelItem.init(level["text"], record_time_str)
         $ScrollContainer/VBoxContainer.add_child(levelItem)
         levelItem.button.connect("pressed", self, "choose_level", [idx])
         if idx == 0:
