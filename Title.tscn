@@ -42,9 +42,11 @@ margin_left = -123.0
 margin_top = -95.0
 margin_right = 123.0
 margin_bottom = -59.0
-rect_pivot_offset = Vector2( 123, 18 )
+rect_pivot_offset = Vector2( 123, 57 )
 custom_fonts/font = ExtResource( 2 )
-text = "Picutre Puzzle Move"
+text = "Picutre
+Puzzle
+Move"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
