@@ -11,8 +11,8 @@ func change_scene_level():
     $Credit.visible = false
 
     $Level.visible = true
-    $Level.grab_focus()
     $Level.init_item_list()
+    $Level.grab_focus()
 
 func change_scene_game(level, num_pieces):
     pass
