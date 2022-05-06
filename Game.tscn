@@ -236,7 +236,7 @@ anchor_bottom = 1.0
 [node name="ColorRect" type="ColorRect" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0.439216 )
+color = Color( 1, 1, 1, 0 )
 
 [node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
 reset_on_save = false
