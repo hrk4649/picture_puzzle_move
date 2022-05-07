@@ -39,6 +39,7 @@ func move_animation(next_position):
     anim_player2.add_animation("move", anim)
     anim_player2.play("move")
 
+
 func select_animation():
     pass
     anim_player1.play("select")

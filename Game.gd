@@ -353,6 +353,7 @@ func init_pieces(num_pieces):
 
 func move_pieces_animation():
     pass
+    var is_move = false
     for idx in range(0, num_pieces):
         var idx_p = board.pieces[idx]
         var tr = pieces[idx_p]
@@ -360,6 +361,9 @@ func move_pieces_animation():
         var current_position = tr.rect_position
         if next_position != current_position:
             tr.move_animation(next_position)
+            is_move = true
+    if is_move:
+        $AudioStreamPlayer2.play()
     
 func move_piece_animation(idx_p, next_position):
     pass
