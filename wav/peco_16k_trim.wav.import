@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/peco_16k_trim.wav-db1722e5e5592c26024c3527a721a431.sample"
+
+[deps]
+
+source_file="res://wav/peco_16k_trim.wav"
+dest_files=[ "res://.import/peco_16k_trim.wav-db1722e5e5592c26024c3527a721a431.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

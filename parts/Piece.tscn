@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://parts/Piece.gd" type="Script" id=1]
+[ext_resource path="res://wav/peco_16k_trim.wav" type="AudioStream" id=2]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -92,6 +93,20 @@ tracks/1/keys = {
 "points": PoolRealArray( 1, 0, 0, 0, 0, 0.5, -0.1, 0, 0.1, 0, 1, 0, 0, 0, 0 ),
 "times": PoolRealArray( 0, 0.2, 0.4 )
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Piece" type="TextureRect"]
 margin_right = 40.0
@@ -110,6 +125,9 @@ anims/RESET = SubResource( 1 )
 anims/select = SubResource( 3 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 
 [connection signal="animation_finished" from="AnimationPlayer1" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer_animation_finished"]
