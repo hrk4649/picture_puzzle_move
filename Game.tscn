@@ -42,7 +42,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0.439216, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -164,7 +164,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -222,7 +222,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -100.0
 margin_right = 100.0
-rect_scale = Vector2( 50.7932, 49.6358 )
 rect_pivot_offset = Vector2( 100, 18 )
 custom_fonts/font = ExtResource( 2 )
 text = "GAME CLEAR !!"
@@ -239,13 +238,11 @@ anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0 )
 
 [node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
-reset_on_save = false
 anims/RESET = SubResource( 1 )
 anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-reset_on_save = false
 anims/RESET = SubResource( 4 )
 anims/message = SubResource( 5 )
 __meta__ = {

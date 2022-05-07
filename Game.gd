@@ -226,7 +226,6 @@ func game_clear():
     var label = $GameClear
     remove_child(label)
     add_child(label)
-    $GameClear.visible = true
 
     # reset select
     cursor = null
