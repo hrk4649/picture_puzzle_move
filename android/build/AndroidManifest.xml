@@ -20,6 +20,24 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <!--
+    for Android TV
+    https://developer.android.com/training/tv/start/start?hl=ja#leanback-req
+    -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <!--
+    for gamepad support on Android TV
+    https://developer.android.com/training/tv/games?hl=ja
+    -->
+    <uses-feature android:name="android.hardware.gamepad" android:required="false"/>
+
 <!-- Custom user permissions XML added by add-ons. It's recommended to add them from the export preset, though. -->
 <!--CHUNK_USER_PERMISSIONS_BEGIN-->
 <!--CHUNK_USER_PERMISSIONS_END-->
