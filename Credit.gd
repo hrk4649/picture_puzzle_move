@@ -1,16 +1,16 @@
 extends Control
 
 var CreditItem = preload("res://parts/CreditItem.tscn")
+var AppLicense = preload("res://app_license.tres")
 
 func _ready():
-    pass # Replace with function body.
-    var file = File.new()
-    file.open("res://LICENSE.tres", File.READ)
-    var text = file.get_as_text()
-    file.close()
+    pass
+    read_license_resource()
+    
+func read_license_resource():
     var item = CreditItem.instance()
     $ScrollContainer/VBoxContainer.add_child(item)
-    item.text = text
+    item.text = AppLicense.text
 
 func _input(event):
     if !visible:
