@@ -24,13 +24,28 @@
     for Android TV
     https://developer.android.com/training/tv/start/start?hl=ja#leanback-req
     -->
-    <uses-feature
-        android:name="android.software.leanback"
+    <uses-feature android:name="android.software.leanback"
         android:required="false" />
-
-    <uses-feature
-        android:name="android.hardware.touchscreen"
+    <uses-feature android:name="android.hardware.touchscreen"
         android:required="false" />
+    <!--
+    for Android TV
+    https://developer.android.com/training/tv/start/hardware.html#declare-hardware-requirements
+    -->
+    <uses-feature android:name="android.hardware.faketouch"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.nfc"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.sensor"
+        android:required="false"/>
 
     <!--
     for gamepad support on Android TV
