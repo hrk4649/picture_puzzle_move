@@ -1,0 +1,191 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/rocks/Main.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 1, 0.796078, 0.364706, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 20, 20, 20 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 1, 1, 0, 1 )
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.694759, 0.719243, 0, -0.719243, 0.694759, 0, 19.779, 24.7162 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.103214, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Markers" type="Spatial" parent="."]
+
+[node name="Marker1" type="Position3D" parent="Markers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1263, 24.067, -12.5178 )
+
+[node name="Marker2" type="Position3D" parent="Markers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7725, 25.6281, -8.34521 )
+
+[node name="collisions" type="Spatial" parent="."]
+visible = false
+
+[node name="Floor" type="CSGBox" parent="collisions"]
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0 )
+use_collision = true
+width = 40.0
+height = 0.5
+depth = 40.0
+
+[node name="TrianglesG" type="Spatial" parent="collisions"]
+transform = Transform( 1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, -20.1131, -10.4941, 17.5255 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Triangle" type="CSGPolygon" parent="collisions/TrianglesG"]
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle2" type="CSGPolygon" parent="collisions/TrianglesG"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle3" type="CSGPolygon" parent="collisions/TrianglesG"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle4" type="CSGPolygon" parent="collisions/TrianglesG"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="TrianglesG2" type="Spatial" parent="collisions"]
+transform = Transform( 1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, -20.4234, -0.804181, 0.802559 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Triangle" type="CSGPolygon" parent="collisions/TrianglesG2"]
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle2" type="CSGPolygon" parent="collisions/TrianglesG2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle3" type="CSGPolygon" parent="collisions/TrianglesG2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="Triangle4" type="CSGPolygon" parent="collisions/TrianglesG2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 9 )
+
+[node name="TrianglesY" type="Spatial" parent="collisions"]
+transform = Transform( 1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -17.1623, -5.77802, 9.08058 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Triangle" type="CSGPolygon" parent="collisions/TrianglesY"]
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle2" type="CSGPolygon" parent="collisions/TrianglesY"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle3" type="CSGPolygon" parent="collisions/TrianglesY"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle4" type="CSGPolygon" parent="collisions/TrianglesY"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="TrianglesY2" type="Spatial" parent="collisions"]
+transform = Transform( 1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, -17.1623, 4.22449, -8.11123 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Triangle" type="CSGPolygon" parent="collisions/TrianglesY2"]
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle2" type="CSGPolygon" parent="collisions/TrianglesY2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle3" type="CSGPolygon" parent="collisions/TrianglesY2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[node name="Triangle4" type="CSGPolygon" parent="collisions/TrianglesY2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, 0, 4.5, 9, 9, 0 )
+depth = 3.0
+material = SubResource( 15 )
+
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
