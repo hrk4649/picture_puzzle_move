@@ -89,8 +89,34 @@
             android:name="com.oculus.supportedDevices"
             android:value="all" />
 
+        <!-- for mobile phone -->
         <activity
             android:name=".GodotApp"
+            android:label="@string/godot_project_name_string"
+            android:theme="@style/GodotAppSplashTheme"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode"
+            android:resizeableActivity="false"
+            android:banner="@drawable/tv_banner_small"
+            tools:ignore="UnusedAttribute" >
+
+            <!-- Focus awareness metadata is removed at export time if the xr mode is not VR. -->
+            <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- Enable access to OpenXR on Oculus mobile devices, no-op on other Android
+                platforms. -->
+                <category android:name="com.oculus.intent.category.VR" />
+            </intent-filter>
+        </activity>
+
+        <!-- for Android TV -->
+        <activity
+            android:name=".GodotApp2"
             android:label="@string/godot_project_name_string"
             android:theme="@style/GodotAppSplashTheme"
             android:launchMode="singleTask"
@@ -106,7 +132,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
                 <!--
                 enable the app to run on Android TV
                 -->
@@ -116,7 +141,6 @@
                 <category android:name="com.oculus.intent.category.VR" />
             </intent-filter>
         </activity>
-
 <!-- Custom application XML added by add-ons. -->
 <!--CHUNK_APPLICATION_BEGIN-->
 <!--CHUNK_APPLICATION_END-->
