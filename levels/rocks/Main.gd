@@ -1,6 +1,6 @@
 extends Spatial
 
-var Rock = load(get_script().resource_path.get_base_dir() + "/Rock.tscn")
+var Rock = load(get_script().resource_path.get_base_dir() + "/rock.tscn")
 
 func _ready():
     pass # Replace with function body.
