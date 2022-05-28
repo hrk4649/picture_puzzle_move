@@ -1,7 +1,7 @@
 extends Spatial
 
 
-var Star = load(get_script().resource_path.get_base_dir() + "/star.tscn")
+var Star = load(get_script().resource_path.get_base_dir() + "/Star.tscn")
 
 var stars = null
 
