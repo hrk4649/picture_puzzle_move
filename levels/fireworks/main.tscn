@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://levels/fireworks/ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/fireworks/main.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0, 0, 0.627451, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.13982, 36.1864 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Positions" type="Spatial" parent="."]
+
+[node name="Position3D1" type="Position3D" parent="Positions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -10, -10 )
+
+[node name="Position3D2" type="Position3D" parent="Positions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 10 )
+
+[node name="Ball1" parent="." instance=ExtResource( 1 )]
+
+[node name="Ball2" parent="." instance=ExtResource( 1 )]
+
+[node name="Ball3" parent="." instance=ExtResource( 1 )]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
