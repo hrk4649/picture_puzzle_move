@@ -20,11 +20,8 @@ TimeManager="*res://TimeManager.gd"
 
 [display]
 
-window/size/width=400
-window/size/resizable=false
-window/handheld/orientation="sensor_portrait"
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/width=960
+window/size/height=540
 
 [input]
 
