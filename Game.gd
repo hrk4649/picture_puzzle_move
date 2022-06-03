@@ -187,7 +187,7 @@ func input_play_mouse(event):
     var adjusted_position = event.position - self.get_global_rect().position
     adjusted_position.x = adjusted_position.x / control_scale.x
     adjusted_position.y = adjusted_position.y / control_scale.y
-    print("input_play_mouse:top_left_position:" + str(top_left_position) + " adjusted_position:" +str(adjusted_position))
+    # print("input_play_mouse:top_left_position:" + str(top_left_position) + " adjusted_position:" +str(adjusted_position))
     var num = board.get_board_num(adjusted_position - top_left_position)
     if num != -1:
         cursor = board.get_board_cursor(num)
