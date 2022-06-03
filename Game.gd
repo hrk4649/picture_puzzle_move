@@ -18,6 +18,8 @@ var cursor = null
 var grabbedPiece = null
 var input_device = InputDevice.KEY_DPAD
 
+var control_scale = Vector2.ONE
+
 var anim_play1
 var anim_play2
 
@@ -182,7 +184,11 @@ func input_play_mouse(event):
     var key_pressed = false
 
     # check which piece is pressed
-    var num = board.get_board_num(event.position - top_left_position)
+    var adjusted_position = event.position - self.get_global_rect().position
+    adjusted_position.x = adjusted_position.x / control_scale.x
+    adjusted_position.y = adjusted_position.y / control_scale.y
+    print("input_play_mouse:top_left_position:" + str(top_left_position) + " adjusted_position:" +str(adjusted_position))
+    var num = board.get_board_num(adjusted_position - top_left_position)
     if num != -1:
         cursor = board.get_board_cursor(num)
         key_pressed = true
@@ -328,7 +334,7 @@ func init_game(level, num_pieces):
 
 func init_top_left_position():
     pass
-    var parent_size = rect_size
+    var parent_size = self.rect_size
     var board_size = board.get_board_size()
     top_left_position = Vector2(
         parent_size.x / 2.0 - board_size.x / 2.0,
