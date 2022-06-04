@@ -49,50 +49,51 @@ reset_on_save = false
 anims/camera_spin = SubResource( 3 )
 
 [node name="Spatial" type="Spatial" parent="."]
-transform = Transform( 0.830226, -0.557426, 1.74846e-07, 0.557426, 0.830226, -2.22979e-13, -1.45161e-07, 9.74636e-08, 1, 0, 0, 0 )
+transform = Transform( 0.999999, 0, 1.74846e-07, 0, 0.999999, 0, -1.74845e-07, 0, 1, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="Spatial"]
+transform = Transform( 0.707107, -0.707107, 1.42109e-14, 0.707107, 0.707107, -1.00486e-14, 0, 0, 1, 0, 0, 0 )
 environment = ExtResource( 2 )
 fov = 40.0
 far = 2000.0
 
 [node name="Planet" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -210.859, 52.3287, -517.817 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -210.859, 146.862, -517.817 )
 radius = 50.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet2" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -459.084, 0, -95.7729 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -459.084, 65.9536, -95.7729 )
 radius = 50.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet3" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1062.55, -36.2247, -2.67192 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 915.254, -36.2247, -2.67192 )
 radius = 40.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet4" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5845, -54.7553, 307.513 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95.3474, -87.7321, 307.513 )
 radius = 60.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet5" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 480.71, -54.1842, -540.269 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 544.465, -115.741, -540.269 )
 radius = 50.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet6" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -457.818, 29.9021, 504.178 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -330.017, -102.005, 504.178 )
 radius = 40.0
 radial_segments = 24
 rings = 8
@@ -106,22 +107,36 @@ rings = 8
 material = SubResource( 2 )
 
 [node name="Planet8" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 454.902, 24.9184, 682.065 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 454.902, -155.355, 682.065 )
 radius = 20.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet9" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.024, 32.3939, -857.117 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 105.024, 89.5537, -857.117 )
 radius = 20.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
 
 [node name="Planet10" type="CSGSphere" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 694.716, 29.9021, 504.178 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 694.716, 175, 429.431 )
 radius = 40.0
+radial_segments = 24
+rings = 8
+material = SubResource( 2 )
+
+[node name="Planet11" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6357, -0.518269, -347.848 )
+radius = 60.0
+radial_segments = 24
+rings = 8
+material = SubResource( 2 )
+
+[node name="Planet12" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 454.902, 181.009, 682.065 )
+radius = 20.0
 radial_segments = 24
 rings = 8
 material = SubResource( 2 )
