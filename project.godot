@@ -24,6 +24,10 @@ TimeManager="*res://TimeManager.gd"
 window/size/width=960
 window/size/height=540
 
+[gui]
+
+theme/custom="res://my_theme.tres"
+
 [input]
 
 ui_accept={
