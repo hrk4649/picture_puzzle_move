@@ -15,7 +15,7 @@ var levels = [
     {"level":"maple_leaves", "text":"Maple Leaves (4 x 4)", "num_pieces":16},
 ]
 
-var LevelItem = preload("res://parts/LevelItem.tscn")
+var LevelItem = preload("res://parts/LevelItem2.tscn")
 
 var key_hook = false
 
@@ -60,16 +60,35 @@ func init_item_list():
         levelItem.init(level["text"], record_time_str)
         $ScrollContainer/VBoxContainer.add_child(levelItem)
         levelItem.button.connect("pressed", self, "choose_level", [idx])
-        if idx == 0:
-            firstLevelButton = levelItem.button
+        levelItem.button.connect("focus_entered", self, "_on_focus_entered")
+ 
+    var children = $ScrollContainer/VBoxContainer.get_children()
+    firstLevelButton = children[0].button
+
+func _on_focus_entered():
+    # How to follow focus when going through entries inside scroll container?
+    # https://godotengine.org/qa/5990/follow-focus-going-through-entries-inside-scroll-container
+    var scroll_container = $ScrollContainer
+    
+    var focused = get_focus_owner()
+    var focus_size = focused.rect_size.y
+    var focus_top = focused.rect_position.y
+    var scroll_size = scroll_container.rect_size.y
+    var scroll_top = scroll_container.get_v_scroll()
+    var scroll_bottom = scroll_top + scroll_size - focus_size
+
+    if focus_top < scroll_top:
+        scroll_container.set_v_scroll(focus_top)
+
+    if focus_top > scroll_bottom:
+        var scroll_offset = scroll_top + focus_top - scroll_bottom
+        scroll_container.set_v_scroll(scroll_offset)
 
 func grab_focus():
     pass
-#    $ItemList.grab_focus()
     if firstLevelButton != null:
         firstLevelButton.grab_focus()
     $ScrollContainer.scroll_vertical = 0
-    #$ItemList.select(0)
 
 func choose_level(index):
     if visible == false :
