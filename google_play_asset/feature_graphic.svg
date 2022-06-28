@@ -156,39 +156,39 @@
        height="132.29167"
        x="12.7"
        y="29.633333"
-       inkscape:export-filename="D:\projects\picture_puzzle_move\google_play_asset\feature_graphic.png"
+       inkscape:export-filename="feature_graphic.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        transform="scale(0.26458333)"
        id="text4521"
-       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:'Meiryo UI';font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect4523);-inkscape-font-specification:'Meiryo UI';font-stretch:normal;font-variant:normal" />
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Meiryo UI';-inkscape-font-specification:'Meiryo UI';white-space:pre;shape-inside:url(#rect4523);display:inline;fill:#000000;fill-opacity:1;stroke:none" />
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,34.932754,37.163178)"
        id="text12337"
-       style="font-style:normal;font-weight:normal;font-size:96px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect12339);fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;font-size:96px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect12339);display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
        inkscape:export-filename="D:\projects\picture_puzzle_move\google_play_asset\feature_graphic.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          x="451.06445"
          y="140.47824"
-         id="tspan4765"><tspan
+         id="tspan10032"><tspan
            style="font-weight:bold;-inkscape-font-specification:'sans-serif Bold'"
-           id="tspan4763">Picture
+           id="tspan10030">Picture
 </tspan></tspan><tspan
          x="451.06445"
          y="260.47824"
-         id="tspan4769"><tspan
+         id="tspan10036"><tspan
            style="font-weight:bold;-inkscape-font-specification:'sans-serif Bold'"
-           id="tspan4767">Puzzle
+           id="tspan10034">Puzzle
 </tspan></tspan><tspan
          x="451.06445"
          y="380.47824"
-         id="tspan4773"><tspan
+         id="tspan10040"><tspan
            style="font-weight:bold;-inkscape-font-specification:'sans-serif Bold'"
-           id="tspan4771">Move</tspan></tspan></text>
+           id="tspan10038">Move</tspan></tspan></text>
     <g
        id="g5117-5"
        transform="translate(249.76666,-143.93333)">
