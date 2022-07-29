@@ -115,6 +115,9 @@ func input_init(event):
         move_pieces_animation()
         anim_play1.play("fade_in")
         game_state = GameState.SHUFFLE
+        
+        $GameReady.visible = false
+        $AnimationPlayer3.stop()
     return key_pressed
 
 func input_play(event):
@@ -331,6 +334,12 @@ func init_game(level, num_pieces):
     game_state = GameState.INIT
     
     $GameClear.visible = false
+    
+    var gameReady = $GameReady
+    remove_child(gameReady)
+    add_child(gameReady)
+    $AnimationPlayer3.play("floating")
+    gameReady.visible = true
 
 func init_top_left_position():
     pass
