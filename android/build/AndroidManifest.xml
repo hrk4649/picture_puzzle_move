@@ -20,39 +20,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <!--
-    for Android TV
-    https://developer.android.com/training/tv/start/start?hl=ja#leanback-req
-    -->
-    <uses-feature android:name="android.software.leanback"
-        android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen"
-        android:required="false" />
-    <!--
-    for Android TV
-    https://developer.android.com/training/tv/start/hardware.html#declare-hardware-requirements
-    -->
-    <uses-feature android:name="android.hardware.faketouch"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.telephony"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.camera"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.nfc"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.location.gps"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.microphone"
-        android:required="false"/>
-    <uses-feature android:name="android.hardware.sensor"
-        android:required="false"/>
-
-    <!--
-    for gamepad support on Android TV
-    https://developer.android.com/training/tv/games?hl=ja
-    -->
-    <uses-feature android:name="android.hardware.gamepad" android:required="false"/>
-
 <!-- Custom user permissions XML added by add-ons. It's recommended to add them from the export preset, though. -->
 <!--CHUNK_USER_PERMISSIONS_BEGIN-->
 <!--CHUNK_USER_PERMISSIONS_END-->
@@ -107,10 +74,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <!--
-                enable the app to run on Android TV
-                -->
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
                 <!-- Enable access to OpenXR on Oculus mobile devices, no-op on other Android
                 platforms. -->
                 <category android:name="com.oculus.intent.category.VR" />
