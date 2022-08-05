@@ -63,7 +63,7 @@
             android:launchMode="singleTask"
             android:excludeFromRecents="false"
             android:screenOrientation="landscape"
-            android:exported="false"
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode"
             android:resizeableActivity="false"
             android:banner="@drawable/tv_banner_small"
