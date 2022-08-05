@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://levels/ufo2/ufo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/ufo2/Main.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0, 0, 0.627451, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2, 2, 2 )
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28 )
+
+[node name="Targets" type="Spatial" parent="."]
+
+[node name="Target1" type="Area" parent="Targets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Targets/Target1"]
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="Targets/Target1"]
+visible = false
+
+[node name="Target2" type="Area" parent="Targets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Targets/Target2"]
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="Targets/Target2"]
+visible = false
+
+[node name="Target3" type="Area" parent="Targets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Targets/Target3"]
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="Targets/Target3"]
+visible = false
+
+[node name="Target4" type="Area" parent="Targets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Targets/Target4"]
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="Targets/Target4"]
+visible = false
+
+[node name="UFO" parent="." instance=ExtResource( 1 )]
+
+[connection signal="body_entered" from="Targets/Target1" to="." method="_on_Target_body_entered"]
+[connection signal="body_entered" from="Targets/Target2" to="." method="_on_Target_body_entered"]
+[connection signal="body_entered" from="Targets/Target3" to="." method="_on_Target_body_entered"]
+[connection signal="body_entered" from="Targets/Target4" to="." method="_on_Target_body_entered"]
