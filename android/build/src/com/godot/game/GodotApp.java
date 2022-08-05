@@ -33,7 +33,6 @@ package com.godot.game;
 import org.godotengine.godot.FullScreenGodotApp;
 
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * Template activity for Godot Android custom builds.
@@ -44,6 +43,5 @@ public class GodotApp extends FullScreenGodotApp {
 	public void onCreate(Bundle savedInstanceState) {
 		setTheme(R.style.GodotAppMainTheme);
 		super.onCreate(savedInstanceState);
-		Log.d("GodotApp", "OS called GodotApp");
 	}
 }

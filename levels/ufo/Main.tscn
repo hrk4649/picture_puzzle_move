@@ -68,6 +68,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 10, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.6
 anims/RESET = SubResource( 2 )
 anims/square = SubResource( 4 )
 anims/zigzag = SubResource( 3 )
