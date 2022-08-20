@@ -3,20 +3,8 @@ extends Node2D
 
 var DragonFly = load(get_script().resource_path.get_base_dir() + "/DragonFly.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
-
 
 func _on_Timer_timeout():
     pass # Replace with function body.
@@ -27,10 +15,7 @@ func _on_Timer_timeout():
     location.offset = randi()
     dragon_fly.position = location.position
     
-    var direction = location.rotation # + PI / 2
-    #var direction = 0
-    #var direction = PI * 0.25
-    direction += rand_range(-PI / 4, PI / 4)
-    #print("direction:" + str(direction))
+    var direction = location.rotation
+    direction += rand_range(deg2rad(-45),deg2rad(45))
     dragon_fly.rotation = direction
     dragon_fly.set_velocity_by_rotation()
