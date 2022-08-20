@@ -29,9 +29,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -10, -10 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 10 )
 
 [node name="Ball1" parent="." instance=ExtResource( 1 )]
+init_star_speed = 12
 
 [node name="Ball2" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="Ball3" parent="." instance=ExtResource( 1 )]
+visible = false
+init_star_speed = 20
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

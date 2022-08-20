@@ -4,9 +4,11 @@
 
 [node name="Star" type="Spatial"]
 script = ExtResource( 1 )
+duration = 1.0
+max_deviation = 2.5
 
 [node name="CSGSphere" type="CSGSphere" parent="."]
-radius = 0.1
+radius = 0.15
 
 [node name="Positions" type="Spatial" parent="."]
 

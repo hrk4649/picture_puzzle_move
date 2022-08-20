@@ -3,6 +3,8 @@ extends Spatial
 
 var Star = load(get_script().resource_path.get_base_dir() + "/Star.tscn")
 
+export var init_star_speed = 10
+
 var stars = null
 
 func _ready():
@@ -12,7 +14,7 @@ func _ready():
 func init_stars():
     var radius0 = 60
     var num_star0 = 12
-    var init_velocity = 10
+    #var init_velocity = 10
     var idx = 0
     for deg1 in range(75, -76, -15):
         var radius1 = radius0 * cos(deg2rad(deg1))
@@ -28,7 +30,7 @@ func init_stars():
                 Vector3.BACK, 
                 deg2rad(deg1)).rotated(
                     Vector3.UP, 
-                    deg2rad(deg2)) * init_velocity
+                    deg2rad(deg2)) * init_star_speed
             star.transform.origin = Vector3.ZERO
             star.visible = true
             idx += 1
