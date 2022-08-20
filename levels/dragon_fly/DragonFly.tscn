@@ -1,14 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/dragon_fly/dragon_fly.png" type="Texture" id=1]
 [ext_resource path="res://levels/dragon_fly/DragonFly.gd" type="Script" id=2]
 
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 149, 100 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 149, 0, 149, 100 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 20.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -21,10 +31,14 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
