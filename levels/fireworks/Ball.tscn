@@ -4,3 +4,4 @@
 
 [node name="Ball" type="Spatial"]
 script = ExtResource( 1 )
+init_star_speed = 15
