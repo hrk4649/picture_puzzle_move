@@ -36,6 +36,11 @@ func input_init(event):
     pass
     var key_pressed = false
 
+    if event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down"):
+        var focused = get_focus_owner()
+        if focused == null:
+            grab_focus()
+
     if event.is_action_pressed("ui_accept"):
         key_pressed = true
 
@@ -100,3 +105,12 @@ func choose_level(index):
         var level = selected["level"]
         var num_pieces = selected["num_pieces"]
         get_parent().change_scene_game(level, num_pieces)
+
+
+func _on_ScrollContainer_scroll_started():
+    pass # Replace with function body.
+    print("_on_ScrollContainer_scroll_started")
+    # reset focus because of using mouse or touch
+    var focused = get_focus_owner()
+    if focused != null:
+        focused.release_focus()
