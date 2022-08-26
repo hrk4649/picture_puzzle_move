@@ -36,6 +36,7 @@ func input_init(event):
     pass
     var key_pressed = false
 
+    # if focus is released, get it back when action input presses.
     if event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down"):
         var focused = get_focus_owner()
         if focused == null:
@@ -108,9 +109,7 @@ func choose_level(index):
 
 
 func _on_ScrollContainer_scroll_started():
-    pass # Replace with function body.
-    print("_on_ScrollContainer_scroll_started")
-    # reset focus because of using mouse or touch
+    # reset focus when using mouse or touching display
     var focused = get_focus_owner()
     if focused != null:
         focused.release_focus()
