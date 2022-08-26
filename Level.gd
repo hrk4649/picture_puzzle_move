@@ -107,9 +107,14 @@ func choose_level(index):
         var num_pieces = selected["num_pieces"]
         get_parent().change_scene_game(level, num_pieces)
 
-
-func _on_ScrollContainer_scroll_started():
+func release_focus_on_scroll():
     # reset focus when using mouse or touching display
     var focused = get_focus_owner()
     if focused != null:
         focused.release_focus()
+
+func _on_ScrollContainer_scroll_started():
+    release_focus_on_scroll()
+
+func _on_ScrollContainer_scroll_ended():
+    release_focus_on_scroll()
