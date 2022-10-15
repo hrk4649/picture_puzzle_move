@@ -16,6 +16,7 @@ var pieces
 var board
 var cursor = null
 var grabbedPiece = null
+var selected_pieces = []
 var input_device = InputDevice.KEY_DPAD
 
 var control_scale = Vector2.ONE
@@ -52,6 +53,8 @@ func _process(delta):
                 if board.is_all_piece_on_correct_place():
                     game_clear()
                 else:
+                    # reset piece selected
+                    selected_pieces = []
                     game_state = GameState.PLAY
         GameState.PLAY:
             change_texture_rect(delta)
@@ -220,6 +223,7 @@ func input_play_select():
         var piece2_value = board.pieces[piece2_idx]
         board.pieces[piece1_idx] = piece2_value
         board.pieces[piece2_idx] = piece1_value
+        selected_pieces = [piece1_value, piece2_value]
         # reset
         grabbedPiece = null
         move_pieces_animation()
@@ -239,6 +243,7 @@ func game_clear():
     # reset select
     cursor = null
     grabbedPiece = null
+    selected_pieces = []
     set_pieces_color()
     
 
@@ -272,7 +277,8 @@ func set_pieces_color():
     for idx1 in range(0, num_pieces):
         var idx2 = board.pieces[idx1]
         var tr = pieces[idx2]
-        tr.set_selected(idx1 == grab_idx or idx1 == cursor_idx)
+        var is_selected = (idx1 == grab_idx or idx1 == cursor_idx or idx2 in selected_pieces)
+        tr.set_selected(is_selected)
 
 func select_piece_animation():
     pass
