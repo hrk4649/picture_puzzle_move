@@ -102,6 +102,7 @@ func choose_level(index):
     if visible == false :
         return
     if index >= 0 and index < levels.size():
+        $AudioStreamPlayer.play()
         var selected = levels[index]
         var level = selected["level"]
         var num_pieces = selected["num_pieces"]
