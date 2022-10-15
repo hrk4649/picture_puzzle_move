@@ -28,5 +28,6 @@ func grab_focus():
     
 func _on_Button_pressed():
     pass # Replace with function body.
+    $AudioStreamPlayer.play()
     get_parent().change_scene_title()
 

@@ -11,9 +11,11 @@ func grab_focus():
 
 func _on_Credit_pressed():
     pass # Replace with function body.
+    $AudioStreamPlayer.play()
     get_parent().change_scene_credit()
 
 
 func _on_Start_pressed():
     pass # Replace with function body.
+    $AudioStreamPlayer.play()
     get_parent().change_scene_level()
