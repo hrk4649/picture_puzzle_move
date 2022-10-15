@@ -1,10 +1,10 @@
 extends Control
 
 var levels = [
-    {"level":"rocks", "text":"Rock (3 x 3)", "num_pieces":9},
-    {"level":"rocks", "text":"Rock (4 x 4)", "num_pieces":16},
     {"level":"ufo", "text":"UFO (3 x 3)", "num_pieces":9},
     {"level":"ufo", "text":"UFO (4 x 4)", "num_pieces":16},
+    {"level":"rocks", "text":"Rock (3 x 3)", "num_pieces":9},
+    {"level":"rocks", "text":"Rock (4 x 4)", "num_pieces":16},
     {"level":"ufo2", "text":"UFO2 (3 x 3)", "num_pieces":9},
     {"level":"ufo2", "text":"UFO2 (4 x 4)", "num_pieces":16},
     {"level":"fireworks", "text":"Fireworks (3 x 3)", "num_pieces":9},
