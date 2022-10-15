@@ -6,6 +6,9 @@ var color_rect
 var anim_player1
 # AnimationPlayer for "move"
 var anim_player2
+# AnimationPlayer for "spin"
+var anim_player3
+
 
 var ready_move = false
 
@@ -16,6 +19,7 @@ func _ready():
     color_rect.rect_size = self.rect_size
     anim_player1 = $AnimationPlayer1
     anim_player2 = $AnimationPlayer2
+    anim_player3 = $AnimationPlayer3
 
 func is_moving():
     pass
@@ -29,7 +33,7 @@ func move_animation(next_position):
     var track_index_y = anim.add_track(Animation.TYPE_VALUE)
     anim.track_set_path(track_index_y, ":rect_position:y")
     var positions = [rect_position, next_position]
-    var time_unit = 0.2
+    var time_unit = 0.3
     for idx in range(0, positions.size()):
         pass
         var time = idx * time_unit
@@ -40,6 +44,7 @@ func move_animation(next_position):
     anim_player2.remove_animation("move")
     anim_player2.add_animation("move", anim)
     anim_player2.play("move")
+    anim_player3.play("spin")
 
 
 func set_selected(value):
