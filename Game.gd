@@ -260,6 +260,7 @@ func set_pieces_color():
     pass
     if pieces == null:
         return
+
     var grab_idx = null
     if grabbedPiece != null:
         grab_idx = board.get_piece_num(grabbedPiece.x, grabbedPiece.y)
@@ -271,10 +272,7 @@ func set_pieces_color():
     for idx1 in range(0, num_pieces):
         var idx2 = board.pieces[idx1]
         var tr = pieces[idx2]
-        var color = Color(1,1,1,0)
-        if idx1 == grab_idx or idx1 == cursor_idx:
-            color = Color(1,1,1,0.5)
-        tr.color_rect.color = color
+        tr.set_selected(idx1 == grab_idx or idx1 == cursor_idx)
 
 func select_piece_animation():
     pass

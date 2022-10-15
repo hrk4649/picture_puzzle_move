@@ -9,6 +9,8 @@ var anim_player2
 
 var ready_move = false
 
+var is_selected = false
+
 func _ready():
     color_rect = $ColorRect
     color_rect.rect_size = self.rect_size
@@ -39,6 +41,13 @@ func move_animation(next_position):
     anim_player2.add_animation("move", anim)
     anim_player2.play("move")
 
+
+func set_selected(value):
+    is_selected = value
+    var color = Color(1,1,1,0)
+    if is_selected:
+        color = Color(1,1,1,0.5)
+    color_rect.color = color
 
 func select_animation():
     pass
