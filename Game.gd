@@ -224,6 +224,11 @@ func input_play_select():
         board.pieces[piece1_idx] = piece2_value
         board.pieces[piece2_idx] = piece1_value
         selected_pieces = [piece1_value, piece2_value]
+        # move selected pieces to front
+        for idx in selected_pieces:
+            var tr = pieces[idx]
+            remove_child(tr)
+            add_child(tr)
         # reset
         grabbedPiece = null
         move_pieces_animation()
