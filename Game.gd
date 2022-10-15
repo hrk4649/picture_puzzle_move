@@ -55,6 +55,7 @@ func _process(delta):
                 else:
                     # reset piece selected
                     selected_pieces = []
+                    set_pieces_color()
                     game_state = GameState.PLAY
         GameState.PLAY:
             change_texture_rect(delta)
@@ -248,6 +249,7 @@ func game_clear():
     # reset select
     cursor = null
     grabbedPiece = null
+    print("reset selected_pieces")
     selected_pieces = []
     set_pieces_color()
     

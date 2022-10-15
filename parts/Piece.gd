@@ -23,7 +23,7 @@ func _ready():
 
 func is_moving():
     pass
-    return anim_player1.is_playing()
+    return (anim_player1.is_playing() or anim_player3.is_playing())
 
 func move_animation(next_position):
     pass
