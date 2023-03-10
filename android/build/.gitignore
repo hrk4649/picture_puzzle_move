@@ -16,5 +16,4 @@ libs/
 local.properties
 # res/
 settings.gradle
-src/debug
-src/release
+src/
