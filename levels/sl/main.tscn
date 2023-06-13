@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/sl/sl.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/sl/main.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.223529, 1, 0.92549, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.0702057, 0, -40.2307, 0, 0, 0, 0, 0, 0, 0.245682, 0, 40.2098 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "sl_move_straight"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Paths/Path1/PathFollow1:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+}, {
+"args": [  ],
+"method": "put_smoke"
+} ]
+}
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 5.1551 )
+projection = 1
+size = 40.0
+
+[node name="Paths" type="Spatial" parent="."]
+
+[node name="Path1" type="Path" parent="Paths"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+curve = SubResource( 2 )
+
+[node name="PathFollow1" type="PathFollow" parent="Paths/Path1"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0.000488282, 0, 1, 0, -0.000488282, 0, 1, 0.245682, 0, 40.2098 )
+offset = 80.4937
+
+[node name="SL" parent="Paths/Path1/PathFollow1" instance=ExtResource( 1 )]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/sl_move_straight = SubResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
