@@ -1,6 +1,8 @@
 extends Control
 
 var levels = [
+    {"level":"sl", "text":"SL (3 x 3)", "num_pieces":9},
+    {"level":"sl", "text":"SL (4 x 4)", "num_pieces":16},
     {"level":"ufo", "text":"UFO (3 x 3)", "num_pieces":9},
     {"level":"ufo", "text":"UFO (4 x 4)", "num_pieces":16},
     {"level":"rocks", "text":"Rock (3 x 3)", "num_pieces":9},
