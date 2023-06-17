@@ -33,6 +33,18 @@ tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 6 )
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("SL:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "sl_move_straight"
@@ -46,6 +58,18 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 8 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SL:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="Main" type="Spatial"]
@@ -79,7 +103,7 @@ curve = SubResource( 4 )
 
 [node name="PathFollow2" type="PathFollow" parent="Paths/Path2"]
 unique_name_in_owner = true
-transform = Transform( -0.00330646, 0, -0.999965, 0, 1, 0, 0.999995, 0, -0.00330636, 48.0184, 0, -0.435722 )
+transform = Transform( -0.00116919, 0, -0.99997, 0, 1, 0, 1, 0, -0.00116915, 40, 0, 16 )
 rotation_mode = 4
 
 [node name="SLTest2" parent="Paths/Path2/PathFollow2" instance=ExtResource( 1 )]

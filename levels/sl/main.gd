@@ -7,6 +7,7 @@ onready var path1 = get_node("%Path1")
 onready var path_follow1 = get_node("%PathFollow1")
 onready var path2 = get_node("%Path2")
 onready var path_follow2 = get_node("%PathFollow2")
+onready var anim_player = $AnimationPlayer
 
 var last_rotation
 
@@ -25,12 +26,12 @@ func choice_path():
             path = path1
             path_follow = path_follow1
             change_path1_rotation()
-            $AnimationPlayer.play("sl_move_straight")
+            anim_player.play("sl_move_straight")
         2:
             path = path2
             path_follow = path_follow2
             change_path2_rotation()
-            $AnimationPlayer.play("sl_move_curve")
+            anim_player.play("sl_move_curve")
         _:
             print("choice_path():invalid choice %s" % choice)
 
