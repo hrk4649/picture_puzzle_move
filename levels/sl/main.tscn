@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://levels/sl/sl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/sl/main.gd" type="Script" id=2]
@@ -10,13 +10,33 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Curve3D" id=2]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.0702057, 0, -40.2307, 0, 0, 0, 0, 0, 0, 0.245682, 0, 40.2098 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.44784e-06, 0, -56, 0, 0, 0, 0, 0, 0, 2.44784e-06, 0, 56 ),
 "tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array( 23.7817, 0, 0.0118744, -23.7817, 0, -0.0118744, 48.0184, 0, -0.435722, 0, 0, 24.0364, 0, 0, -24.0364, 0.0572362, 0, -48.0912 ),
+"tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "sl_move_curve"
+length = 6.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Paths/Path2/PathFollow2:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 6 )
 }
 
 [sub_resource type="Animation" id=3]
 resource_name = "sl_move_straight"
-length = 5.0
+length = 8.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Paths/Path1/PathFollow1:unit_offset")
 tracks/0/interp = 1
@@ -25,48 +45,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5 )
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-}, {
-"args": [  ],
-"method": "put_smoke"
-} ]
+"times": PoolRealArray( 0, 8 )
 }
 
 [node name="Main" type="Spatial"]
@@ -76,25 +55,47 @@ script = ExtResource( 2 )
 environment = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 5.1551 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 31.0148, 29.6536 )
 projection = 1
 size = 40.0
 
 [node name="Paths" type="Spatial" parent="."]
 
 [node name="Path1" type="Path" parent="Paths"]
+unique_name_in_owner = true
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
 curve = SubResource( 2 )
 
 [node name="PathFollow1" type="PathFollow" parent="Paths/Path1"]
 unique_name_in_owner = true
-transform = Transform( 1, 0, 0.000488282, 0, 1, 0, -0.000488282, 0, 1, 0.245682, 0, 40.2098 )
-offset = 80.4937
+transform = Transform( 1, 0, 0.000488282, 0, 1, 0, -0.000488282, 0, 1, -2.44784e-06, 0, -56 )
 
-[node name="SL" parent="Paths/Path1/PathFollow1" instance=ExtResource( 1 )]
+[node name="SLTest1" parent="Paths/Path1/PathFollow1" instance=ExtResource( 1 )]
+visible = false
+
+[node name="Path2" type="Path" parent="Paths"]
 unique_name_in_owner = true
+curve = SubResource( 4 )
+
+[node name="PathFollow2" type="PathFollow" parent="Paths/Path2"]
+unique_name_in_owner = true
+transform = Transform( -0.00330646, 0, -0.999965, 0, 1, 0, 0.999995, 0, -0.00330636, 48.0184, 0, -0.435722 )
+rotation_mode = 4
+
+[node name="SLTest2" parent="Paths/Path2/PathFollow2" instance=ExtResource( 1 )]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/sl_move_curve = SubResource( 5 )
 anims/sl_move_straight = SubResource( 3 )
 
+[node name="SL" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+transform = Transform( 0.000488238, 0, -1, 0, 1, 0, 1, 0, 0.000488238, 40.2307, 0, -0.0702039 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

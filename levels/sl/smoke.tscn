@@ -1,8 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://levels/sl/smoke.gd" type="Script" id=1]
-
-[sub_resource type="SpatialMaterial" id=1]
+[ext_resource path="res://levels/sl/smoke_material1.tres" type="Material" id=2]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -94,7 +93,7 @@ transform = Transform( -0.00181375, 0, 0, 0, -0.00181375, 0, 0, 0, -0.00181375, 
 [node name="CSGSphere" type="CSGSphere" parent="model"]
 radius = 3.0
 rings = 7
-material = SubResource( 1 )
+material = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
