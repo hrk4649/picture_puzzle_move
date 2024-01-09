@@ -89,6 +89,7 @@ config/icon="res://icon.png"
 
 TimeManager="*res://TimeManager.gd"
 MobileAds="*res://addons/admob/src/singletons/MobileAds.gd"
+AdsManager="*res://parts/AdsManager.gd"
 
 [display]
 
