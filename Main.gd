@@ -47,6 +47,7 @@ func change_scene_title():
 
 	$Title.visible = true
 	$Title.grab_focus()
+	$Title.init_buttons()
 
 func change_scene_credit():
 	pass
