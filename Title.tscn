@@ -128,6 +128,7 @@ text = "ver 0.1.33
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
+[connection signal="pressed" from="HBoxContainer/WatchAd" to="." method="_on_WatchAd_pressed"]
 [connection signal="pressed" from="HBoxContainer/GetCoin" to="." method="_on_GetCoin_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Credit" to="." method="_on_Credit_pressed"]
