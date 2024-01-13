@@ -36,13 +36,14 @@ script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.4
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.4
 margin_left = -123.0
 margin_top = -95.0
 margin_right = 123.0
 margin_bottom = -59.0
+rect_scale = Vector2( 0.827814, 0.827814 )
 rect_pivot_offset = Vector2( 123, 57 )
 custom_fonts/font = ExtResource( 2 )
 text = "Picture
@@ -54,11 +55,51 @@ align = 1
 reset_on_save = false
 anims/forth_and_back = SubResource( 1 )
 
+[node name="Coin" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 0.5
+anchor_bottom = 0.55
+margin_left = -72.0
+margin_top = -18.0
+margin_right = 72.0
+margin_bottom = 18.0
+text = "YOUR COIN:"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+margin_left = -198.0
+margin_top = -20.0
+margin_right = 198.0
+margin_bottom = 20.0
+
+[node name="WatchAd" type="Button" parent="HBoxContainer"]
+margin_right = 224.0
+margin_bottom = 40.0
+text = "AD(MORE COINS)"
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 228.0
+margin_top = 2.0
+margin_right = 240.0
+margin_bottom = 38.0
+text = "  "
+
+[node name="GetCoin" type="Button" parent="HBoxContainer"]
+margin_left = 244.0
+margin_right = 396.0
+margin_bottom = 40.0
+text = "GET 1 COIN"
+
 [node name="Start" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 0.7
+anchor_top = 0.75
 anchor_right = 0.5
-anchor_bottom = 0.7
+anchor_bottom = 0.75
 margin_left = -80.0
 margin_top = -10.0
 margin_right = 80.0
@@ -82,11 +123,13 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 custom_fonts/font = ExtResource( 2 )
-text = "ver 0.1.33
-(C) 2022-2023 flat-e "
+text = "ver 0.2.1
+(C) 2022-2024 flat-e "
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
+[connection signal="pressed" from="HBoxContainer/WatchAd" to="." method="_on_WatchAd_pressed"]
+[connection signal="pressed" from="HBoxContainer/GetCoin" to="." method="_on_GetCoin_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Credit" to="." method="_on_Credit_pressed"]
