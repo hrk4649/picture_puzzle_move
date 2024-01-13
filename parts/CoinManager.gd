@@ -2,7 +2,7 @@ extends Node
 
 var MAX_COIN = 10
 
-var coin:int = 1 setget set_coin, get_coin
+var coin:int = 3 setget set_coin, get_coin
 
 func set_coin(value) -> void:
 	pass
