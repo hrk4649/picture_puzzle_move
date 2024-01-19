@@ -9,8 +9,15 @@ func _ready():
 func resize_main_node():
 	pass
 	var vp_size = get_viewport_rect().size
+	var vp_ratio = vp_size.y / vp_size.x 
 	var size = self.rect_size
+	var size_ratio = size.y / size.x
+	# iPad
 	var new_scale = vp_size.y / size.y
+	if vp_ratio > size_ratio:
+		# smart phone
+		new_scale = vp_size.x / size.x
+	print("resize_main_node:new_scale:%s" % new_scale)
 	self.rect_scale = Vector2(new_scale, new_scale)
 	$Game.control_scale = Vector2(new_scale, new_scale)
 
